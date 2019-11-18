@@ -83,10 +83,18 @@ namespace Library_Management_System.Controllers
             //dataPoints.Add(new DataPointcs("Literature", 9));
             //dataPoints.Add(new DataPointcs("Physiology or Medicine", 11));
             //dataPoints.Add(new DataPointcs("Peace", 13));
-            
-          
-            ViewBag.DataPoints = JsonConvert.SerializeObject(BookIssued.GetRandomDataForCategoryAxis(6), _jsonSetting);
 
+            var student = db.LR_Issue.Where(x => x.Status == "Book Issued").GroupBy(x => x.title).ToList();
+            foreach (var item in student)
+            {
+                ViewBag.name = item.Key;
+                string Name = item.Key;
+                int Count = item.Key.Count();
+                
+                
+            
+            ViewBag.DataPoints = JsonConvert.SerializeObject(BookIssued.GetRandomDataForCategoryAxis(Count,Name), _jsonSetting);
+            }
 
 
 

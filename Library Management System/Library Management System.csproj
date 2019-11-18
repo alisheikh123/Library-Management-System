@@ -212,6 +212,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddBook.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\chart.cs" />
     <Compile Include="Models\DataPointcs.cs" />
     <Compile Include="Models\LR_AlliedLogs.cs" />
     <Compile Include="Models\LR_AssignRolestoUsers.cs" />
