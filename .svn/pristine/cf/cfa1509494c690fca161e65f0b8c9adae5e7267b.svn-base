@@ -1,0 +1,28 @@
+namespace Library_Management_System.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class Migration6 : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.LR_Category",
+                c => new
+                    {
+                        id = c.Int(nullable: false, identity: true),
+                        name = c.String(),
+                        shortname = c.String(),
+                        parent = c.String(),
+                    })
+                .PrimaryKey(t => t.id);
+            
+        }
+        
+        public override void Down()
+        {
+            DropTable("dbo.LR_Category");
+        }
+    }
+}

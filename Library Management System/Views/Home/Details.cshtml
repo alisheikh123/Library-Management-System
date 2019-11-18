@@ -1,0 +1,171 @@
+﻿@model Library_Management_System.Models.LR_Books
+
+@{
+    ViewBag.Title = "";
+}
+
+    <link href="~/Content/form.css" rel="stylesheet" />
+    <link href="~/Content/table.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-xs-8 col-md-8">
+        <div class="box box-default" style="align-content:center; margin-left:170px;">
+            <div class="form-basic">
+                <div class="text-body">
+                    <div class="form-title-row">
+                        <h2 style="color:#6caee0">Book Details</h2>
+                    </div>
+
+                    <hr />
+                    <div class="form-row">
+                        <div class="text-row">
+                            <p class="text-element heading">ISBN</p>
+                            <p class="text-element"> @Html.DisplayFor(model => model.ISBN)</p>
+
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Name</p>
+
+                            <p class="text-element"> @Html.DisplayFor(model => model.name)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Quantity</p>
+
+                            <p class="text-element">  @Html.DisplayFor(model => model.Quantity)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Author Name</p>
+
+                            <p class="text-element"> @Html.DisplayFor(model => model.author_name)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Publisher Name</p>
+
+                            <p class="text-element">  @Html.DisplayFor(model => model.publisher_name)</p>
+                        </div>
+
+                        <div class="text-row">
+                            <p class="text-element heading">Status</p>
+
+                            <p class="text-element">@Html.DisplayFor(model => model.status)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Cost</p>
+
+                            <p class="text-element detailStyle"> @Html.DisplayFor(model => model.cost)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Purchase Date</p>
+
+                            <p class="text-element detailStyle"> @Html.DisplayFor(model => model.purchase_date)</p>
+                        </div>
+                    </div>
+
+
+                  
+                </div>
+            </div>
+        </div>
+        <p style="text-align:left">
+            @Html.ActionLink("Edit", "EditBooks", new { id = Model.id },htmlAttributes:new {@class="btn btn-default" }) |
+            @Html.ActionLink("Back to List", "Index",null,htmlAttributes:new { @class = "btn btn-primary"})
+        </p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.author_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.publisher_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publisher_name)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.purchase_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.purchase_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditBooks", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

@@ -1,0 +1,35 @@
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+
+namespace Library_Management_System.Models
+{
+
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext()
+            : base("DefaultConnection", throwIfV1Schema: false)
+        {
+        }
+
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
+
+        public DbSet<LR_Books> LR_Books { get; set; }
+        public DbSet<LR_BooksLogs> LR_BooksLogs { get; set; }
+        public DbSet<LR_Category> LR_Category { get; set; }
+        public DbSet<LR_BookCategory> LR_BookCategory { get; set; }
+        public DbSet<LR_Fine> LR_Fine { get; set; }
+        public DbSet<LR_Issue> LR_Issue { get; set; }
+        public DbSet<AddBook> AddBook { get; set; }
+        //public DbSet<LR_Event> LR_Event { get; set; }
+      public DbSet<LR_ArticleCategory> ArticleCategory { get; set; }
+        public DbSet<LR_ReturnBook> LR_ReturnBook { get; set; }
+    }
+}

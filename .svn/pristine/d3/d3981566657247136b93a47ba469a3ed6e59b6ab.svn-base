@@ -1,0 +1,128 @@
+﻿using Library_Management_System.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Library_Management_System.Controllers
+{
+    public class IssuesController : Controller
+    {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        // GET: Issues
+        public ActionResult Index()
+        {
+            return View(db.LR_Issue.ToList());
+        }
+
+        // GET: Issues/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_Issue issue = db.LR_Issue.Find(id);
+            if (issue == null)
+            {
+                return HttpNotFound();
+            }
+            return View(issue);
+        }
+
+        // GET: Issues/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Issues/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "issueid,issuenceNo,isbn,stdid,staffid,issuedate,returndate,isreturned,reissue,reissue2,reissue3,returnedDate,issuedBy,issuedOn,recievedby,recivedDate,fineDue,fineRecieved")] LR_Issue issue)
+        {
+            if (ModelState.IsValid)
+            {
+                //var chkISBN = db.AddBooks.Where(x => x.bookname == addBook.bookname).ToList();
+                db.LR_Issue.Add(issue);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(issue);
+        }
+
+        // GET: Issues/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_Issue issue = db.LR_Issue.Find(id);
+            if (issue == null)
+            {
+                return HttpNotFound();
+            }
+            return View(issue);
+        }
+
+        // POST: Issues/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "issueid,issuenceNo,isbn,stdid,staffid,issuedate,returndate,isreturned,reissue,reissue2,reissue3,returnedDate,issuedBy,issuedOn,recievedby,recivedDate,fineDue,fineRecieved")] LR_Issue issue)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(issue).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(issue);
+        }
+
+        // GET: Issues/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_Issue issue = db.LR_Issue.Find(id);
+            if (issue == null)
+            {
+                return HttpNotFound();
+            }
+            return View(issue);
+        }
+
+        // POST: Issues/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            LR_Issue issue = db.LR_Issue.Find(id);
+            db.LR_Issue.Remove(issue);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

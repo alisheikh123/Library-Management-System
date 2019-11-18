@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Books>
+
+@{
+    ViewBag.Title = "List of All Books";
+}
+
+<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#reqtbl').DataTable();
+    });
+</script>
+
+<html>
+<body>
+
+    <div class="form-basic">
+        <p style="text-align:left;">
+            @Html.ActionLink("Create New", "AddBooks")
+        </p>
+
+
+
+        <div class="table-responsive">
+            <table style="width:100%;" class="table-responsive table-condensed table-bordered table-hover table-striped" id="reqtbl">
+                <thead class="table-header">
+                    <tr class=" headingStyle label-primary">
+                        <th>
+                            <strong>
+                                ISBN
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Author Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Publisher Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                               Cost
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                               Purchase Date
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Action
+                            </strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="tablebody">
+                    @Html.Partial("_BooksList", Model)
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

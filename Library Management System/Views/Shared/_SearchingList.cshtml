@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Books>
+@foreach (var item in Model)
+{
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+
+
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.author_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.publisher_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.edition)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.article_category)
+        </td>
+
+
+    </tr>
+}

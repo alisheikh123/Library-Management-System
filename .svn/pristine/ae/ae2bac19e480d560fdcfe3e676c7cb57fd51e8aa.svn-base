@@ -1,0 +1,248 @@
+﻿@model Library_Management_System.Models.LR_BookCategory
+
+@{
+                /**/
+
+                ViewBag.Title = "";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @*@Html.HiddenFor(model => model.UserId)*@
+
+    <div class="form-basic">
+        <div class="row">
+            <div class=" col-md-4">
+                <div class="box box-primary" style="margin-left:300px;">
+                    <div class="text-body" style="margin:10px;">
+                        <h4>Assign Categories to books</h4>
+                        <div class="box-body">
+                            @*<div class="form-horizontal">*@
+
+                                <hr />
+
+                                <div class="form-group">
+                                    <label class="form-label"> Book:</label>
+
+                                    <div class="input-group col-sm-9">
+                                        <div class="col-sm-12" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                            <input id="magicsuggest" />
+                                        </div>
+                                    </div>
+                                    </div>
+                                    @*<div class="form-group">
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.book_id, (SelectList)ViewBag.book, htmlAttributes: new
+                {
+                    @class = "input form-control",
+                })
+            </div>
+            @Html.ValidationMessageFor(model => model.book_id, "", new { @class = "text-danger" })
+
+        </div>*@
+
+                                <div class="form-group">
+                                    <label class="form-label">Category</label>
+                                    <div class="input-group col-sm-9">
+
+                                        <div class="col-sm-12" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                            <input id="magicsuggest1" />
+                                        </div>
+                                        </div>
+                                    </div>
+                                    @*<label style="margin-top:80px;">Category</label>
+        <div class="form-group">
+
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.category_id, (SelectList)ViewBag.cat, htmlAttributes: new
+                {
+                    @class = "input form-control",@})
+                </div>
+
+
+                    </div>*@
+                                    <div class="form-group">
+
+                                        <div class="col-md-3">
+                                            <input type="hidden" name="BookId" id="BookId" />
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="col-md-3">
+                                            <input type="hidden" name="CatId" id="CatId" />
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Create" id="Enroll" class="btn btn-primary btn-submit DisableFormSubmitButton" style="width: 110px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+
+            </div>
+        </div>
+    @*</div>*@
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ViewCat")
+</div>
+
+@*@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Content/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/Content/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="~/Content/multi-select-autocomplete/autocomplete.multiselect.js"></script>
+    <script type="text/javascript">
+        var UserList = [];
+        var SelectedUser = [];
+        $(function () {
+
+            $.ajax({
+                beforeSend: function () {
+                },
+                complete: function () {
+                },
+                url: "/Category/UserList",
+                type: "POST",
+                success: function (data) {
+                    console.log(data)
+                    UserList = data;
+                    debugger;
+                    $('#myAutocompleteMultiple').autocomplete({
+                        source: UserList,
+                        multiselect: true,
+                        recive: function (data) {
+                            SelectedUser = data;
+                        }
+                    });
+                },
+                error: function () {
+                    alert('something went wrong !');
+                }
+            });
+        });
+    </script>*@
+
+<input id="Books" type="hidden" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/Magicsuggest/magicsuggest.js"></script>
+
+    <script>
+        var dataaaa='';
+
+        //alert(dataaaa);
+        var ms = $('#magicsuggest').magicSuggest({
+            allowFreeEntries: false,
+            useZebraStyle: true,
+            strictSuggest: true,
+            minChars: 3,
+
+            minCharsRenderer: function (v) {
+                return 'Be more precise!!';
+            },
+            resultAsString: true,
+            data: '/Category/UserList',
+            valueField: 'id',
+            displayField: 'name',
+            maxSuggestions: 20,
+            maxSelection: 1,
+            dataUrlParams: {
+                CourseId: '@ViewBag.courseId',
+                RoleTitle: '@ViewBag.RoleTitle',
+                Selected: function () {
+                    var bb = $("#Books").val();
+                        return bb;
+                    }
+            }
+            });
+            $(ms).on('selectionchange', function () {
+                dataaaa = this.getValue();
+                $("#Books").val(dataaaa);
+        });
+
+        $("#Enroll").on('click', function (event) {
+            var SelectedUser = ms.getValue();
+
+            if (SelectedUser == "") {
+                //alert("Enter User Id");
+                $("#error").html("Please Enter a Book");
+                event.preventDefault();
+            }
+            else {
+                $("#BookId").val(SelectedUser);
+            }
+        });
+
+
+
+    </script>
+    @*For Category*@
+    <input id="Category" type="hidden" />
+    <script>
+        var dataaaa='';
+
+        var ms1 = $('#magicsuggest1').magicSuggest({
+            allowFreeEntries: false,
+            useZebraStyle: true,
+            strictSuggest: true,
+            minChars: 3,
+
+            minCharsRenderer: function (v) {
+                return 'Be more precise!!';
+            },
+            resultAsString: true,
+            data: '/Category/UserList1',
+            valueField: 'id',
+            displayField: 'name',
+            maxSuggestions: 20,
+            dataUrlParams: {
+                CourseId: '@ViewBag.courseId',
+                RoleTitle: '@ViewBag.RoleTitle',
+                Selected: function () {
+                    var bb = $("#Category").val();
+                        return bb;
+                    }
+            }
+            });
+            $(ms).on('selectionchange', function () {
+                dataaaa = this.getValue();
+                $("#Category").val(dataaaa);
+        });
+
+        $("#Enroll").on('click', function (event) {
+            var SelectedUser = ms1.getValue();
+
+            if (SelectedUser == "") {
+                //alert("Enter User Id");
+                $("#error").html("Please Enter a Book");
+                event.preventDefault();
+            }
+            else {
+                $("#CatId").val(SelectedUser);
+            }
+        });
+
+
+
+    </script>
+
+}

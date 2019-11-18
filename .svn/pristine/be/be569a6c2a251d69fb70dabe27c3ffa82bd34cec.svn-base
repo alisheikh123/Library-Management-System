@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Library_Management_System.Models
+{
+    public class Magazines
+    {
+        public int mgid { get; set; }
+        public string mag_name { get; set; }
+        public string author_name { get; set; }
+        public string publisher_name { get; set; }
+        public DateTime? publication_date { get; set; }
+        public int publication_year { get; set; }
+
+    }
+}

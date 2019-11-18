@@ -1,0 +1,18 @@
+﻿
+    <div>
+    @Html.DropDownList("Role", (SelectList)ViewBag.cat , null, htmlAttributes: new
+    {
+        @class = "input form-control",
+    })
+        @*<select>
+            @{
+
+                foreach (var item in ViewBag.cat)
+                {
+                    <option value="@item.id">
+                        @item.catname
+                    </option>
+                }
+            }
+        </select>*@
+            </div>

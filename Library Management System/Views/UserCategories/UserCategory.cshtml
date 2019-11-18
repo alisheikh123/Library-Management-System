@@ -1,0 +1,154 @@
+﻿@model Library_Management_System.Models.LR_UserCategory
+
+@{
+    ViewBag.Title = "";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-basic">
+        <div class="row">
+            <div class=" col-md-8">
+                <div class="box box-primary" style="margin-left:40px;">
+                    <div class="text-body" style="margin:15px;">
+                        <h3 style="text-align: center;">Define User Category</h3>
+                        <div class="box-body">
+
+                            <div class="row" style="margin-left:0px;">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label"> Name:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user-o"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Short Name:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user-o"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.shortname, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.shortname, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Max ReIssue Days:</label>
+
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.ReIDays, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ReIDays, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row" style="margin-left:0px;">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Priority:</label>
+
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.priority, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.priority, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Book Issue Limit:</label>
+
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.BIssue_Limit, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BIssue_Limit, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Max Issue Days:</label>
+
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.FirstIDays, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.FirstIDays, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row" style="margin-left:0px;">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Max No of Attempts:</label>
+
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.attempts, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.attempts, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3  pull-right" style="margin-top:10px;">
+                                <input type="submit" value="Create" class="btn btn-primary btn-submit DisableFormSubmitButton" style="width: 110px;margin-bottom:15px;margin-left:120px; " />
+                            </div>
+                        </div>
+                    </div>
+                 
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_JournalsNews>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+
+
+
+@using (Html.BeginForm("searchNew", "BookIssue", FormMethod.Get))
+{
+
+
+    <div class="row">
+        <div class="col-xs-6 col-md-6">
+            <div class="box box-default" style="width:550px;">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Search by Title</label>
+                                <div class="input-group img-responsive">
+
+
+                                    @Html.TextBox("search")
+                                    <input type="submit" name="submit" value="Search" style="margin-left:20px;" />
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" style="margin-top:20px;" type="button" data-toggle="dropdown">
+                                    Search Type
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="~/BookIssue/Searching" id="books">Book</a></li>
+                                    <li><a href="~/BookIssue/searchNewcat">Newspaper</a></li>
+                                    <li><a href="~/BookIssue/searchmagNew">Magazine</a></li>
+                                    <li><a href="~/BookIssue/searchjouNew">Journal</a></li>
+                                    <li><a href="~/AlliedMaterial/thesisView">Thesis</a></li>
+                                    <li><a href="~/AlliedMaterial/fypview">FYP Reports</a></li>
+                                    <li><a href="~/AlliedMaterial/cdview">CD/Video Cassettes </a></li>
+                                    <li><a href="~/AlliedMaterial/novelview">Novels</a></li>
+                                    <li><a href="~/AlliedMaterial/pamphlets">Pamphlets</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<div class="form-basic" id="divs">
+
+
+
+    <div class="table-responsive">
+        <table style="width:100%;" class="table-responsive table-condensed table-bordered table-hover table-striped" id="reqtbl">
+            <thead class="table-header" style="color:#000;">
+                <tr class=" headingStyle label-primary">
+                    <th>
+                        <strong>
+                            Title
+                        </strong>
+                    </th>
+
+                    <th>
+                        <strong>
+                            Author Name
+                        </strong>
+                    </th>
+
+                    <th>
+                        <strong>
+                            Cost
+                        </strong>
+                    </th>
+                    <th>
+                        <strong>
+                            Edition
+                        </strong>
+                    </th>
+                    <th>
+                        <strong>
+                            Status
+                        </strong>
+                    </th>
+                    <th>
+                        <strong>
+                            Article Category
+                        </strong>
+                    </th>
+                    <th>
+                        <strong>
+                            Remaining Quantity
+                        </strong>
+                    </th>
+                    <th>
+                        <strong>
+                            Quantity
+                        </strong>
+                    </th>
+                </tr>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.author_name)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cost)
+                        </td>
+
+
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.edition)
+                        </td>
+
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.article_category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remaining_Quanity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.type_category)
+                        </td>
+
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+
+</script>

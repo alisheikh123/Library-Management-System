@@ -1,0 +1,88 @@
+﻿<aside class="main-sidebar">
+    <section class="sidebar">
+        @* BEGIN Search *@
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        @* END Search *@
+        @* BEGIN Menu *@
+        <ul id="sidebar-menu" class="sidebar-menu" data-widget="tree">
+            <li class="header">HEADER</li>
+            <li>
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-link"></i> <span>Home</span></a>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-link"></i> <span>Books</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a onclick="trigger(this);" href="~/Home/Dashboard>Dashboard</a></li>
+                    <li><a onclick="trigger(this);" href="~/JournalNews/Index">View Journals & NewsPaper</a></li>
+                    <li><a onclick="trigger(this);" href="~/AlliedMaterial/Index">Allied Material</a></li>
+                    <li><a onclick="trigger(this);" href="~/Category/Index">Define Categories</a></li>
+                    <li><a onclick="trigger(this);" href="~/Category/catlist">View Defined Categories</a></li>
+                    <li><a onclick="trigger(this);" href="~/Category/AddCategory">Add Categories</a></li>
+                    <li><a onclick="trigger(this);" href="~/Category/ViewCat">View Categories</a></li>
+                    <li><a onclick="trigger(this);" href="~/BookIssue/Index">Issue Books</a></li>
+                    @*<li><a onclick="trigger(this);" href="~/BookIssue/ViewReturnBooks">Return Books</a></li>*@
+                    <li><a onclick="trigger(this);" href="~/BookIssue/Return">Return</a></li>
+
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-link"></i> <span>Reports</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a onclick="trigger(this);" href="~/Reports/Index">View reports</a></li>
+                    <li><a onclick="trigger(this);" href="~/BookIssue/ReservedList">Reserved List</a></li>
+                    
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-link"></i> <span>Search</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a onclick="trigger(this);" href="~/BookIssue/AdvanceSearch">Advance Search</a></li>
+                </ul>
+            </li>
+            @*<li>
+            <a href="@Url.Action("Searching", "BookIssue")"><i class="fa fa-link"></i> <span>Search</span></a>
+        </li>*@
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-link"></i> <span>Users</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a onclick="trigger(this);" href="~/UserCategories/UserCategory">Create User Categories</a></li>
+                    <li><a onclick="trigger(this);" href="~/UserCategories/AssignRoles">Assign Roles</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+</aside>
+
+

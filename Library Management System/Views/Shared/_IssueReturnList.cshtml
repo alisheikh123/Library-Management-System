@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Issue>
+@foreach (var item in Model)
+{
+    <tr id="@item.id">
+        <td>
+            @Html.DisplayFor(modelItem => item.student_id)
+        </td>
+        <td>
+            @if (item.artCat_id == 1)
+            {
+
+                @Html.DisplayFor(modelItem => item.ISBN)
+
+            }
+            else
+            {
+                <p>-----</p>
+            }
+        </td>
+        <td>
+            @if (item.artCat_id != 1)
+            {
+
+                @Html.DisplayFor(modelItem => item.title)
+
+            }
+            else
+            {
+                <p> -----</p>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.author_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.artCat.catname)
+        </td>
+        <td>
+            @item.Issue_Date.ToShortDateString()
+        </td>
+        <td>
+            @item.ExpiryDate.ToShortDateString()
+        </td>
+        <td>
+            @{
+                var amount = 30;
+                TimeSpan day;
+
+                DateTime datI = item.Issue_Date;
+                DateTime datR = item.ExpiryDate;
+                DateTime datD = DateTime.Now;
+                if (datR < datD)
+                {
+                    day = datD.Subtract(datR);
+                    int d = day.Days;
+                    var fin = d * amount;
+                    <p>@fin</p>
+                    //return View(model);
+                }
+                else
+                {
+                    <p>N/A</p>
+                }
+            }
+        </td>
+        <td id="row-status">
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.activity)
+        </td>*@
+        <td>
+
+
+            @{
+                if (item.Status == "Available")
+                {
+                    <input type="button" id="reissue" onclick="ReIssue(@item.id, $(this));" class="btn btn-success btn-sm" value="ReIssue" />
+                }
+                else
+                {
+                    <input type="button" style="font-size:12px;" class="btn btn-primary" id="return" value="Return" onclick="updateIssues(@item.id, $(this));" />
+                }
+            }
+
+            
+
+
+        </td>
+    </tr>
+
+    <script>
+
+    </script>
+
+}

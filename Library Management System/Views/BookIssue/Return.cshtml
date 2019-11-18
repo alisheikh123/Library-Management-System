@@ -1,0 +1,246 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Issue>
+
+@{
+    ViewBag.Title = "Return Books";
+}
+
+@using (Html.BeginForm("Return", "BookIssue", FormMethod.Get))
+{
+
+    <div class="row">
+        <div class="col-xs-3 col-md-6">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Enter Student Id</label>
+
+                                <div class="input-group img-responsive">
+                                    <div style="background-color: #95b0d6;
+                                    height: 3px;">
+                                    </div>
+                                    @*<br /><b> Search By: </b><br />
+                                        @Html.RadioButton("option", "student_id")*@
+
+
+
+
+                                    @Html.TextBox("search")
+                                    <input type="submit" name="submit" value="Search" />
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@*<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#reqtbl').DataTable();
+        });
+    </script>*@
+<html>
+<body>
+
+    <div class="form-basic">
+
+
+
+        <div class="table-responsive" @*id="tbldisplay" style="display:none;"*@>
+            <table style="width:100%;" class="table-responsive table-condensed table-bordered table-hover table-striped" id="reqtbl">
+                <thead class="table-header">
+                    <tr class=" headingStyle label-primary">
+                        @if (TempData["ImpMsg"] != null)
+    {
+                    <p style="color: red; font-style: italic;">
+                        @TempData["ImpMsg"]
+                    </p>
+}
+                        @if (TempData["Imp"] != null)
+                  {
+                    <p style="color: red; font-style: italic;">
+                        @TempData["Imp"]
+                    </p>
+                  }
+                        <th>
+                            <strong>
+                                Student Id
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                ISBN
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Author Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Category
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Issue Date
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Expiry Date
+                            </strong>
+                        </th>
+                        <th>
+                            Fine till now
+                        </th>
+                        <th>
+                            <strong>
+                                Status
+                            </strong>
+                        </th>
+                        @*<th>
+            <strong>
+                Activity
+            </strong>
+        </th>*@
+                        <th>
+                            <strong>
+                                Actions
+                            </strong>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="tablebody">
+                    @Html.Partial("_IssueReturnList", Model)
+                </tbody>
+            </table>
+        </div>
+
+      
+        <div id="myModalSave" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ReIssue Book</h4>
+                    </div>
+                    <div class="modal-body" style="padding:30px">
+                        @using (Html.BeginForm("ReIssue", "BookIssue", null, FormMethod.Post, new { id = "myform"}))
+                        {
+                        <div class="form-group" >
+                            <label class="form-label"> Re-Issue Date:</label>
+                            <div class="col-sm-6" style="padding: 0px; margin-left:20px; float: none; display: table;" >
+                                <input type="date" id="reIssueDate"  name="reIssueDate"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"> Expiry Date:</label>
+                            <div class="col-sm-6" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                <input type="date" id="ExpiryDate" name="ExpiryDate" />
+                            </div>
+                        </div>
+                        <br />
+                        <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+<script>
+   // Return Book
+    function updateIssues(s, event) {
+        if (confirm("Are you sure you want to return ?")) {
+            var parent = $("#" + s);
+            var status_col = parent.find("#row-status");
+            var activity_col = parent.find("#row-activity");
+            //alert(status_col.html());
+
+            $.ajax({
+                url: "/BookIssue/ReturnMaterial",
+                type: "GET",
+                dataType: "text",
+                data: { code: s },
+                success: function (newmodel) {
+                    if (newmodel) {
+                        status_col.html("Available");
+                        activity_col.html("Deactive");
+                        $(event).replaceWith('<input type="button" id="reissue" onclick="reissue" class="btn btn-success btn-sm" value="ReIssue" />')
+                        window.location.reload();
+
+                    }
+
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    }
+
+
+</script>
+
+
+
+
+
+<script>
+   // ReIssue Book
+    function ReIssue(s, event) {
+        
+        if (confirm("Are you sure you want to ReIssue it ?")) {
+            
+            var parent = $("#" + s);
+            var status_col = parent.find("#row-status");
+            var activity_col = parent.find("#row-activity");
+            $('#myModalSave').modal('hide');
+            $('#myform').append('<input type="hidden" name="item_id" value= "' + s + '">')
+            $('#myModalSave').modal();
+        
+        } 
+        else
+        {
+                  return false;
+        }
+    }
+
+
+</script>

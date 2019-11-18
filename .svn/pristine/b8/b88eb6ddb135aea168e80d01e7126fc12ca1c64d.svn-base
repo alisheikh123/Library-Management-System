@@ -1,0 +1,66 @@
+﻿@model Library_Management_System.Models.AddBook
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AddBook</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.isbn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isbn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bookname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bookname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.authorname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.authorname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.edition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.edition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.copies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.copies)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.bookid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

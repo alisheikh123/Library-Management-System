@@ -1,0 +1,154 @@
+﻿@model Library_Management_System.Models.LR_Issue
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Issue</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.issuenceNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.issuenceNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isbn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isbn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stdid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stdid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.staffid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.staffid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.issuedate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.issuedate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.returndate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.returndate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isreturned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isreturned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reissue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reissue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reissue2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reissue2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reissue3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reissue3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.returnedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.returnedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.issuedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.issuedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.issuedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.issuedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recievedby)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recievedby)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recivedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recivedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fineDue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fineDue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fineRecieved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fineRecieved)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.issueid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

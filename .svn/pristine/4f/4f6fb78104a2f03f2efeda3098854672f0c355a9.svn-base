@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_BookCategory>
+
+@{
+    ViewBag.Title = "Categories List";
+}
+<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#reqtbl').DataTable();
+    });
+</script>
+<html>
+<body>
+
+    <div class="form-basic">
+        <p style="text-align:left;">
+            @Html.ActionLink("Create New", "AddCategory")
+        </p>
+
+
+
+        <div class="table-responsive">
+            <table style="width:100%;" class="table-responsive table-condensed table-bordered table-hover table-striped" id="reqtbl">
+                <thead class="table-header">
+                    <tr class=" headingStyle label-primary">
+                        <th>
+                            <strong>
+                                Book Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                ISBN
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Category
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Action
+                            </strong>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="tablebody">
+                    @Html.Partial("_List", Model)
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*//Original Data*@
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.book.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book.ISBN)
+        </th>
+        <th>
+            <label>Action</label>
+        </th>
+        <th></th>
+    </tr>*@

@@ -1,0 +1,129 @@
+﻿@model IEnumerable < Library_Management_System.Models.LR_Issue>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.issuenceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isbn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stdid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.staffid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issuedate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.returndate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isreturned)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reissue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reissue2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reissue3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.returnedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issuedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issuedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recievedby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recivedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fineDue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fineRecieved)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.issuenceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isbn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stdid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.staffid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.issuedate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.returndate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isreturned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reissue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reissue2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reissue3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.returnedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.issuedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.issuedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.recievedby)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.recivedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fineDue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fineRecieved)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.issueid }) |
+                @Html.ActionLink("Details", "Details", new { id = item.issueid }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.issueid })
+            </td>
+        </tr>
+    }
+
+</table>

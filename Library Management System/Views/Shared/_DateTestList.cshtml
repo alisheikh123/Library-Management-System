@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_ReturnBook>
+<th>
+    @Html.DisplayNameFor(model => model.returnedDate)
+</th>
+@foreach (var item in Model)
+{
+    <td>
+        @Html.DisplayFor(modelItem => item.returnedDate)
+    </td>
+    }

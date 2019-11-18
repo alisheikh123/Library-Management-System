@@ -1,0 +1,28 @@
+namespace Library_Management_System.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class Migration3 : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.LR_Books", "date", c => c.DateTime());
+            AddColumn("dbo.LR_Books", "activity", c => c.String());
+            AddColumn("dbo.LR_Books", "Category", c => c.String());
+            AlterColumn("dbo.LR_Books", "name", c => c.String(nullable: false));
+            AlterColumn("dbo.LR_Books", "author_name", c => c.String(nullable: false));
+            AlterColumn("dbo.LR_Books", "purchase_date", c => c.DateTime(nullable: false));
+        }
+        
+        public override void Down()
+        {
+            AlterColumn("dbo.LR_Books", "purchase_date", c => c.DateTime());
+            AlterColumn("dbo.LR_Books", "author_name", c => c.String());
+            AlterColumn("dbo.LR_Books", "name", c => c.String());
+            DropColumn("dbo.LR_Books", "Category");
+            DropColumn("dbo.LR_Books", "activity");
+            DropColumn("dbo.LR_Books", "date");
+        }
+    }
+}

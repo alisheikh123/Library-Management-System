@@ -1,0 +1,36 @@
+namespace Library_Management_System.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class Migration31 : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.LR_BooksLogs",
+                c => new
+                    {
+                        id = c.Long(nullable: false, identity: true),
+                        book_id = c.Int(nullable: false),
+                        ISBN = c.Int(nullable: false),
+                        name = c.String(),
+                        cost = c.Single(nullable: false),
+                        category = c.String(),
+                        Status = c.String(),
+                        date = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.id)
+                .ForeignKey("dbo.LR_Books", t => t.book_id, cascadeDelete: true)
+                .Index(t => t.book_id);
+            
+        }
+        
+        public override void Down()
+        {
+            DropForeignKey("dbo.LR_BooksLogs", "book_id", "dbo.LR_Books");
+            DropIndex("dbo.LR_BooksLogs", new[] { "book_id" });
+            DropTable("dbo.LR_BooksLogs");
+        }
+    }
+}

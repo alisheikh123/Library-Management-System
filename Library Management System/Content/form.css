@@ -1,0 +1,282 @@
+html, body {
+    background-color: #f3f3f3;
+    height: 100%;
+}
+
+body {
+}
+
+.form-body {
+    overflow: hidden;
+}
+.text-body {
+    overflow: hidden;
+    width: 75%;
+    margin: auto;
+}
+.text-row{
+    overflow: hidden;
+}
+
+.text-element {
+    width: 47%;
+    margin: 0px;
+    float: left;
+    text-align: left;
+}
+.heading{
+    font-weight: bold;
+}
+.form-basic {
+    max-width: 1000px;
+    margin: 2% auto;
+    padding: 25px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+    .form-basic .form-row {
+        margin-bottom: 22px;
+    }
+
+.form-row {
+    float: left;
+    width: 48%;
+}
+
+.form-row-full {
+    float: left;
+    width: 100%;
+}
+
+.form-basic .form-title-row {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+/* The form title */
+
+.form-basic h1 {
+    display: inline-block;
+    box-sizing: border-box;
+    color: #4c565e;
+    font-size: 24px;
+    padding: 0 10px 15px;
+    border-bottom: 2px solid #6caee0;
+    margin: 0;
+}
+
+.form-basic .form-row > label span {
+    display: inline-block;
+    box-sizing: border-box;
+    color: #5F5F5F;
+    float: left;
+    width: 30%;
+    text-align: left;
+    vertical-align: top;
+    padding: 7px 0px;
+}
+.form-basic .form-row > label, .form-basic .form-row > text-body {
+    width: 100%;
+}
+.form-basic .form-row > label input, select {
+    float: left;
+    width: 68%;
+}
+.table-row select, .table-row input{
+    float: left;
+    width: 80%;
+}
+
+.form-basic input {
+    color: #5f5f5f;
+    box-sizing: border-box;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 6px 12px;
+    border: 1px solid #dbdbdb;
+}
+
+.headingStyle {
+    text-align: justify;
+    color: rgb(255,165,0);
+    padding: 25px 25px 25px 25px;
+    font-weight: normal;
+}
+
+.form-basic input[type=radio],
+.form-basic input[type=checkbox] {
+    box-shadow: none;
+    width: auto;
+}
+
+.form-basic input[type=checkbox] {
+    margin-top: 13px;
+}
+
+.form-basic select {
+    background-color: #ffffff;
+    color: #5f5f5f;
+    box-sizing: border-box;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 6px 8px;
+    border: 1px solid #dbdbdb;
+}
+
+.form-basic textarea {
+    color: #5f5f5f;
+    box-sizing: border-box;
+    width: 240px;
+    height: 80px;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    font: normal 13px;
+    padding: 12px;
+    border: 1px solid #dbdbdb;
+    resize: vertical;
+}
+
+.form-basic .form-radio-buttons {
+    display: inline-block;
+    vertical-align: top;
+}
+
+    .form-basic .form-radio-buttons > div {
+        margin-top: 10px;
+    }
+
+    .form-basic .form-radio-buttons label span {
+        margin-left: 8px;
+        color: #5f5f5f;
+        font-weight: normal;
+    }
+
+    .form-basic .form-radio-buttons input {
+        width: auto;
+    }
+
+.form-basic button {
+    float: right;
+    width: 20%;
+    display: block;
+    border-radius: 2px;
+    background-color: #f2f2f2;
+    color: #646464;
+    font-weight: bold;
+    border: 2px solid #6caee0;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 5px 8px;
+    margin: 50px 1% 20px 1%;
+    -webkit-transition-property: border,background-color; /* Safari */
+    -webkit-transition-duration: 1s; /* Safari */
+    transition-property: border,background-color;
+    transition-duration: 1s;
+}
+    .form-basic button:hover {
+        background-color: #C1E4FF;
+        border: 2px solid #6caee0;
+    }
+    .circle {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(44,108,128);
+    position: absolute;
+    top: 28px;
+    left: 1px;
+    z-index: 1;
+    box-shadow: 2px 3px 5px #CFCFCF;
+}
+.circle-minus {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(44,108,128);
+    position: absolute;
+    top: 28px;
+    right: 1px;
+    z-index: 1;
+    box-shadow: 2px 3px 5px #CFCFCF;
+}
+
+.horizontal-plus {
+    position: relative;
+    background-color: #FFFFFF;
+    width: 50%;
+    height: 12.5%;
+    left: 25%;
+    top: 43.75%;
+}
+
+.vertical-plus {
+    position: relative;
+    background-color: #FFFFFF;
+    width: 12.5%;
+    height: 50%;
+    left: 43.75%;
+    top: 12.5%;
+}
+
+/*	Making the form responsive. Remove this media query
+    if you don't need the form to work on mobile devices. */
+
+@media (max-width: 600px) {
+
+    .form-basic {
+        padding: 30px;
+        max-width: 480px;
+    }
+
+        .form-basic .form-row {
+            text-align: left;
+        }
+
+        .form-basic .form-title-row {
+            margin-bottom: 50px;
+        }
+
+    .form-row {
+        width: 100%;
+    }
+
+    .form-basic .form-row > label span {
+        display: block;
+        text-align: left;
+        padding: 0 0 15px;
+    }
+
+    .form-basic .form-row > label input, select {
+    }
+
+    .form-basic select {
+    }
+
+    .form-basic input[type=checkbox] {
+        margin-top: 0;
+    }
+
+    .form-basic .form-radio-buttons > div {
+        margin: 0 0 10px;
+    }
+
+    .form-basic button {
+        margin: 0 1%;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .form-basic button {
+        float: unset;
+        width: 100%;
+        margin: 4px;
+    }
+    .form-basic .form-row
+    {
+        margin-bottom: 4px;
+    }
+        .form-basic .form-row > label span
+        {
+            font-size: 12px;
+        }
+}

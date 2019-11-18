@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Issue>
+@{
+
+}
+
+<h2>Dasboard</h2>
+<body>
+    <div class="row" style="margin-top: 1%;">
+        <!-- ./col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-book"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total No of Issued Books</span>
+                    <span id="ContentPlaceHolder1_txtTotalEmp" class="info-box-number">@ViewBag.issueBookCount</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="glyphicon glyphicon-usd"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Students Fine Collected</span>
+                    <span id="ContentPlaceHolder1_txtPresent" class="info-box-number">@ViewBag.FineBookCount</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-blue"><i class="fa fa-book"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total No of Reserved books</span>
+                    <span id="ContentPlaceHolder1_txtAbsent" class="info-box-number">@ViewBag.reserveBookCount</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-book" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Return Books</span>
+                    <span id="ContentPlaceHolder1_Span1" class="info-box-number">@ViewBag.ReturnBooksCount/ @ViewBag.issueBookCount </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+
+
+
+
+    </div>
+    <div id="chartContainer" style="height: 470px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+        text: "Library Popular Books Data"
+	},
+	subtitles: [{
+        text: "Most Issued Books"
+	}],
+	axisY: {
+		title: "Number of Nobel Prizes",
+		gridThickness: 0
+	},
+	data: [{
+        type: "bar",
+        showInLegend: true,
+        name: "Math",
+        color: "gold",
+       dataPoints: @Html.Raw(ViewBag.DataPoints),
+
+    },
+        {
+            type: "bar",
+            showInLegend: true,
+            name: "English",
+            color: "Blue",
+         dataPoints: @Html.Raw(ViewBag.DataPoints),
+
+        }
+
+
+
+    ],
+
+
+});
+chart.render();
+
+}
+</script>

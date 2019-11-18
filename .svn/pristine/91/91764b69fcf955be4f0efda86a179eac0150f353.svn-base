@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+
+namespace Library_Management_System.Models
+{
+    public class LR_Books
+    {
+
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+        public int artCat_id { get; set; }
+        [ForeignKey("artCat_id")]
+        public virtual LR_ArticleCategory artCat { get; set; }
+        [Required]
+        public int ISBN { get; set; }
+        public int ISSN { get; set; }
+        public string Language { get; set; }
+        public string Company { get; set; }
+        [Required]
+        public string name { get; set; }
+        public string description { get; set; }
+        [Required]
+        public string author_name { get; set; }
+        public string publisher_name { get; set; }
+        [Required]
+        public float cost { get; set; }
+        [Required]
+        public DateTime? purchase_date { get; set; }
+        public DateTime? date { get; set; }
+        public string activity { get; set; }
+<<<<<<< .mine
+        [Required]
+        public DateTime date_year_ofpublication { get; set; }
+        public float edition { get; set; }
+        public Decimal Impact_Factor { get; set; }
+        public Decimal Eigen_Factor { get; set; }
+        public int Bill_num { get; set; }
+        public string status { get; set; }
+        public string article_category { get; set; }
+        public string type_category { get; set; }
+||||||| .r1
+       public int publication_year { get; set; }
+=======
+        public string Status { get; set; }
+       public int publication_year { get; set; }
+>>>>>>> .r8
+
+    }
+}

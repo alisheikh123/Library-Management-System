@@ -1,0 +1,20 @@
+namespace Library_Management_System.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class Migration2 : DbMigration
+    {
+        public override void Up()
+        {
+            AlterColumn("dbo.LR_Books", "year_of_publication", c => c.DateTime());
+            AlterColumn("dbo.LR_Books", "purchase_date", c => c.DateTime());
+        }
+        
+        public override void Down()
+        {
+            AlterColumn("dbo.LR_Books", "purchase_date", c => c.DateTime(nullable: false));
+            AlterColumn("dbo.LR_Books", "year_of_publication", c => c.DateTime(nullable: false));
+        }
+    }
+}

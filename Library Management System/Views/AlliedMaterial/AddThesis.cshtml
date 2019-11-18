@@ -1,0 +1,284 @@
+﻿@model Library_Management_System.Models.LR_AlliedMaterial
+
+@{
+    ViewBag.Title = "";
+}
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Books</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="box box-default">
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <input type="hidden" name="artCat_id" value="@ViewBag.artId" />
+
+                        <div class="box-body">
+                            <h4>Add Thesis </h4>
+                            <hr />
+
+                            <p style="color:red; font:italic">@ViewBag.warning</p>
+
+
+                            <div class="row" style="margin-left:0px;">
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group col-md-11">
+                                        <label>Title:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-leanpub"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group col-md-11">
+                                        <label>Volume No:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user-circle-o"></i>
+                                            </div>
+
+                                            @Html.EditorFor(model => model.Volume_No, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Volume_No, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group col-md-11">
+                                        <label>Issue No:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user-o"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.Issue_No, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Issue_No, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group col-md-11">
+                                        <label>Publication Date:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.publication_date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.publication_date, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-left:0px;">
+
+                                <div class="col-md-3">
+                                    <div class="form-group col-md-11">
+                                        <label>Publisher Name:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user-circle-o"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.publisher_name, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.publisher_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group col-md-11">
+                                        <label>Thesis Category:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-leanpub"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.thesis_category, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.thesis_category, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group col-md-11">
+                                        <label>Description</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-server"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="display:none;">
+                                @Html.LabelFor(model => model.purchase_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.purchase_date, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.purchase_date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="row" style="margin-left:0px;">
+
+
+                                <div class="col-md-2">
+                                    <div class="form-group col-md-11">
+                                        <label>Cost:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-usd"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group col-md-11">
+                                        <label>Author Name:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user-circle-o"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.author_name, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.author_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <div class="form-group col-md-11">
+                                        <label>Quantity:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-server"></i>
+                                            </div>
+                                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="row" style="margin-left:0px;">
+                            
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-3  pull-right">
+                                    <input type="submit" value="Save" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-sm" })
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

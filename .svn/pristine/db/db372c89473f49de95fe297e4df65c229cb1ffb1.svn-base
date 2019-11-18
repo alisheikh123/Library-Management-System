@@ -1,0 +1,113 @@
+﻿@model Library_Management_System.Models.LR_ReturnBook
+
+@{
+    ViewBag.Title = "";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-basic">
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="box box-primary" style="margin-left:220px;">
+                    <div class="text-body" style="margin:10px;">
+                        <h2></h2>
+                        <div class="box-body">
+                            <h2 style="text-align:center;">Return Book</h2>
+
+                            <div class="form-group">
+                                <label class="form-label"> Student Id:</label>
+                                <div class="input-group col-sm-9">
+                                    @Html.EditorFor(model => model.student_id, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.student_id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="form-label"> Department:</label>                            <div class="input-group col-sm-9">
+                                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="form-label"> Select Book:</label>
+                                <div class="input-group col-sm-9">
+                                    @*<input class="form-control" style="margin:0px,0px,0px,0px;padding:0px,0px,0px,0px" id="myAutocompleteMultiple" type="text" />*@
+                                    @Html.EditorFor(model => model.book_title, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    @Html.ValidationMessageFor(model => model.book_title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label"> Enter ISBN:</label>
+                                <div class="input-group col-sm-9">
+                                    @Html.EditorFor(model => model.ISBN, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ISBN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label"> Issue Date:</label>
+                                <div class="input-group col-sm-9">
+                                    @Html.EditorFor(model => model.Issue_Date, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Issue_Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label"> Due Date:</label>
+                                <div class="input-group col-sm-9">
+                                    @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label"> Return Date:</label>
+                                <div class="input-group col-sm-9">
+                                    @Html.EditorFor(model => model.returnedDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.returnedDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label"> Fine, if any:</label>
+                                <div class="input-group col-sm-9">
+                                    @Html.EditorFor(model => model.fine, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.fine, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Return " class="btn btn-primary btn-submit " style="width: 110px;margin-bottom:15px;margin-left:120px; " />
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "ViewReturnBooks")
+    </div>
+}

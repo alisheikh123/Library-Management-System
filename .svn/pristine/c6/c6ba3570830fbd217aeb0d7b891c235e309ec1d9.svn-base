@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Library_Management_System.Models
+{
+    public class LR_ReturnBook
+    {
+        public int id { get; set; }
+        [Display(Name = "Book Return Date:")]
+        [Required(ErrorMessage = "Enter the Book Return Date *")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime returnedDate { get; set; }
+
+        [Display(Name = "Book Issued By:")]
+        [Required(ErrorMessage = "Enter issued person name *")]
+        public string issuedBy { get; set; }
+
+        [Display(Name = "Book Issued On:")]
+        [Required(ErrorMessage = "Please enter book issued date *")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime issuedOn { get; set; }
+
+        [Display(Name = "Book Recieved By:")]
+        public string recievedby { get; set; }
+
+        [Display(Name = "Book Recieved On:")]
+        [Required(ErrorMessage = "Enter the Book Received Date *")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? recivedDate { get; set; }
+
+        [Display(Name = "Total Fine:")]
+        public decimal? fineDue { get; set; }
+
+        [Display(Name = "Fine Recieved:")]
+        public decimal? fineRecieved { get; set; }
+        public string status { get; set; }
+    }
+}

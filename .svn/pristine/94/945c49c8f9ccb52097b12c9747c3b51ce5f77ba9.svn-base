@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Issue>
+
+@{
+                /**/
+
+                ViewBag.Title = "DateTest";
+}
+
+<h2>DateTest</h2>
+
+<html>
+<head>
+    <title>JavaScript Get Days</title>
+
+</head>
+
+<body>
+
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Issue_Date)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.returnedDate)
+                </th>*@
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td> @Html.DisplayFor(modelItem => item.Issue_Date)</td>
+            @*@Html.Partial("_DateTestList");*@
+        </tr>
+        }
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        var date1, date2;
+        date1 = new Date();
+        document.write("" + date1);
+        date2 = new Date("Dec 10, 2015 20:15:10");
+        document.write("<br>" + date2);
+        // get total seconds between two dates
+        var res = Math.abs(date1 - date2) / 1000;
+        var days = Math.floor(res / 86400);
+        document.write("<br>Difference: " + days);
+        alert(days);
+    </script>
+</body>
+</html>

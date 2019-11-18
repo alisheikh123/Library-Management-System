@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_BookCategory>
+
+@{
+    ViewBag.Title = "";
+}
+
+
+@using (Html.BeginForm("AdvanceSearch", "BookIssue", FormMethod.Get))
+{
+
+    <div class="row">
+        <div class="col-xs-6 col-md-6">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Advance Search</label>
+                                <div class="input-group img-responsive">
+                                    <div style="background-color: #95b0d6;
+                                    height: 3px;">
+                                    </div>
+                                    <br /><b> Search By: </b><br />
+                                    @Html.RadioButton("option", "Name")
+                                    <text>Name</text>
+                                    <br /><br />
+                                    @Html.RadioButton("option", "TypeCategory")
+                                    <text>Type Category</text><br /><br />
+
+                                    @Html.RadioButton("option", "ArticleCategory")
+                                    <text>Article Category</text><br /><br />
+
+                                    @Html.RadioButton("option", "Author")
+                                    <text>Author</text><br /><br />
+
+                                    @*@Html.RadioButton("option", "ISBN")
+                                    <text>ISBN</text><br /><br />*@
+
+                                    @Html.TextBox("search")
+                                    <input type="submit" name="submit" value="Search" />
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+    <table class="table">
+        <tr>
+            <th>
+                Book Name
+            </th>
+            <th>
+                Category Type
+            </th>
+            <th>
+                Article Category
+            </th>
+            <th>
+                ISBN
+            </th>
+            <th>
+                Book Author
+            </th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+        <tr> <td colspan="3"> Records not found </td> </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.article_category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.author_name)
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            </td>*@
+        </tr>
+            }
+        }
+    </table>

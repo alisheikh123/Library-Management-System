@@ -1,0 +1,118 @@
+﻿using Library_Management_System.Models;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Library_Management_System.Controllers
+{
+    public class CategoryController : Controller
+    {
+        // GET: Category
+        ApplicationDbContext db = new ApplicationDbContext();
+        public ActionResult Index()
+        {
+
+            List<LR_Category> cat = db.LR_Category.ToList();
+            ViewBag.cat = new SelectList(cat, "id", "name");
+
+
+            return View();
+        }
+        //Insert New Category
+        [HttpPost]
+        public ActionResult Index(LR_Category model,FormCollection from)
+        {
+            model.date = DateTime.Now;
+            db.LR_Category.Add(model);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult catlist()
+        {
+            List<LR_Category> list = db.LR_Category.ToList();
+            return View(list);
+        }
+
+        public ActionResult AddCategory()
+        {
+            List<LR_Category> cat = db.LR_Category.ToList();
+            ViewBag.cat = new SelectList(cat, "id", "name");
+
+            List<LR_Books> book = db.LR_Books.ToList();
+            ViewBag.book = new SelectList(book, "id", "name");
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddCategory(LR_BookCategory model,FormCollection from)
+        {
+            model.date = DateTime.Now;
+            db.LR_BookCategory.Add(model);
+            db.SaveChanges();
+            return RedirectToAction("ViewCat");
+        }
+        public ActionResult ViewCat()
+        {
+            List<LR_BookCategory> list = db.LR_BookCategory.ToList();
+            return View(list);
+        }
+
+
+
+
+
+        [HttpPost]
+        public JsonResult Index2(string keyword, int courseId)
+        {
+            List<LR_Books> list = new List<LR_Books>();
+
+            if (Session["userList"] == null)
+            {
+                UserSession();
+            }
+            list = (List<LR_Books>)Session["userList"];
+
+
+
+
+            var result = (from a in list where a.name.ToLower().StartsWith(keyword.ToLower()) select new { a.name });
+
+
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        
+        public JsonResult UserList()
+        {
+            List<string> list = new List<string>();
+
+            if (Session["bookList"] == null)
+            {
+                UserSession();
+            }
+            list = (List<string>)Session["bookList"];
+            //var result = list.Select(n => n.UserName).ToArray();
+
+
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public void UserSession()
+        {
+            var _context = new ApplicationDbContext();
+            //  var UserManager = new UserManager<ApplicationUser>(new UserStore<LR_Books>(_context));
+
+            List<string> list = db.LR_Books.Select(x=> x.name).ToList();
+           
+            Session["bookList"] = list;
+
+        }
+
+    }
+}

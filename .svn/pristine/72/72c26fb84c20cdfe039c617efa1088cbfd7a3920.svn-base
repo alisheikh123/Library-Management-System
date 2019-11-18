@@ -1,0 +1,83 @@
+﻿@model Library_Management_System.Models.LR_Category
+
+@{
+    ViewBag.Title = "";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-basic" >
+        <div class="row" >
+            <div class=" col-md-4">
+                <div class="box box-primary" style="margin-left:300px;">
+                    <div class="text-body" style="margin:10px;">
+                        <h2>Add Category</h2>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label class="form-label"> Book Name:</label>
+
+                                <div class="input-group col-sm-9">
+
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Short Name:</label>
+
+                                <div class="input-group col-sm-9">
+                                    @Html.EditorFor(model => model.shortname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.shortname, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="form-label">Parent:</label>
+
+                                <div class="input-group col-sm-9">
+                                    @Html.DropDownListFor(model => model.parent, (SelectList)ViewBag.cat, htmlAttributes: new
+                    {
+                        @class = "input form-control",@*@onchange = "FillFaculty()"*@})
+                                </div>
+                                @Html.ValidationMessageFor(model => model.parent, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <div>
+                            <input type="submit" value="Create" class="btn btn-primary btn-submit DisableFormSubmitButton" style="width: 110px;margin-bottom:15px;margin-left:120px; " />
+                        </div>
+                    </div>
+                </div>
+                
+                          
+                        </div>
+                     </div>
+        </div>
+
+
+                        <div>
+                            @Html.ActionLink("Back to List", "catlist")
+                        </div>
+}
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
+
+
+            
+
+
+
+
+
+
+    

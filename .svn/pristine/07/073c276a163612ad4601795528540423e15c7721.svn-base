@@ -1,0 +1,104 @@
+﻿using System;
+using Library_Management_System.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Library_Management_System.Controllers
+{
+    public class JournalNewsController : Controller
+    {
+        // GET: JournalNews
+        private ApplicationDbContext db = new ApplicationDbContext();
+        public ActionResult Index()
+        {
+
+            List<SelectListItem> priority = new List<SelectListItem>()
+                    {
+                        new SelectListItem{ Text="Journals", Value="2"},
+                        new SelectListItem{ Text="NewsPaper", Value="3"},
+                      
+                    };
+            ViewBag.prioritylist = priority;
+            List<LR_ArticleCategory> catname = db.ArticleCategory.ToList();
+            ViewBag.cat = new SelectList(catname, "id", "catname");
+            List<LR_JournalsNews> list = db.LR_JournalsNews.ToList();
+            return View(list);
+            
+        }
+        //Add AddJournal
+        public ActionResult AddJournal(int? artId)
+        {
+            if (artId == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.artId = artId;
+                return View();
+            }
+
+        }
+        [HttpPost]
+        public ActionResult AddJournal(LR_JournalsNews model, FormCollection from)
+        {
+
+            model.date = DateTime.Now;
+            model.activity = "Journal Added";
+            model.status = "Available";
+            // model.ISBN = "xxxxx";
+            model.article_category = "Journal";
+            db.LR_JournalsNews.Add(model);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+    
+        //Add AddNewsPaper
+        public ActionResult AddNewsPaper(int? artId)
+        {
+            ViewBag.artId = artId;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddNewsPaper(LR_JournalsNews model, FormCollection from)
+        {
+            model.date = DateTime.Now;
+            model.activity = "Newspaper Added";
+            model.status = "Available";
+            model.article_category = "NewsPaper";
+            db.LR_JournalsNews.Add(model);
+            db.SaveChanges();
+           
+
+            return RedirectToAction("AddNewsPaper");
+
+        }
+
+       
+        [HttpPost]
+        public ActionResult CreateNewBooks(string Role)
+        {
+            switch (Role)
+            {
+                //case "1":
+                //    return RedirectToAction("AddBooks", new { artId = Role });
+                //    ;
+                case "2":
+                    return RedirectToAction("AddJournal", new { artId = Role });
+                case "3":
+                    return RedirectToAction("AddNewsPaper", new { artId = Role });
+                //case "4":
+                //    return RedirectToAction("AddMagazines", new { artId = Role });
+
+                default:
+                    break;
+            }
+            return View();
+        }
+
+    }
+}

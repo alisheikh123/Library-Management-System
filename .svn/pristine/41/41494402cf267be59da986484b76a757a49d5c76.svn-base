@@ -1,0 +1,100 @@
+﻿@model Library_Management_System.Models.LR_BookCategory
+
+@{
+    ViewBag.Title = "Add Category";
+}
+
+<h2>Add Category</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.book_id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.book_id, (SelectList)ViewBag.book, htmlAttributes: new
+        {
+            @class = "input form-control",})
+            </div>
+                    @Html.ValidationMessageFor(model => model.book_id, "", new { @class = "text-danger" })
+
+                </div>
+
+    
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.category_id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.category_id, (SelectList)ViewBag.cat, htmlAttributes: new
+            {
+                @class = "input form-control",@*@onchange = "FillFaculty()"*@})
+        </div>
+        @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+
+    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.category_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.category_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ViewCat")
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Content/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/Content/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="~/Content/multi-select-autocomplete/autocomplete.multiselect.js"></script>
+    <script type="text/javascript">
+        var UserList = [];
+        var SelectedUser = [];
+        $(function () {
+
+            $.ajax({
+                beforeSend: function () {
+                },
+                complete: function () {
+                },
+                url: "/Category/UserList",
+                type: "POST",
+                success: function (data) {
+                    console.log(data)
+                    UserList = data;
+                    debugger;
+                    $('#myAutocompleteMultiple').autocomplete({
+                        source: UserList,
+                        multiselect: true,
+                        recive: function (data) {
+                            SelectedUser = data;
+                        }
+                    });
+                },
+                error: function () {
+                    alert('something went wrong !');
+                }
+            });
+        });
+    </script>
+}

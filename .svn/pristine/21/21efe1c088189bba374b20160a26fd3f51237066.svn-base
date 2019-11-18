@@ -1,0 +1,49 @@
+﻿using Library_Management_System.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Library_Management_System.Controllers
+{
+    public class ReportsController : Controller
+    {
+
+        ApplicationDbContext db = new ApplicationDbContext();
+        // GET: Reports
+        public ActionResult Index()
+        {
+            List<SelectListItem> LOgfilteritems = new List<SelectListItem>()
+                    {
+                        new SelectListItem{ Text="All", Value="All"},
+                        new SelectListItem{ Text="Available Books", Value="Available"},
+                        new SelectListItem{ Text="Issued Books", Value="Book Issued"}
+ };
+
+            ViewData["LOgfilteritems"] = LOgfilteritems;
+            List<LR_Books> list = db.LR_Books.ToList();
+            return View(list);
+        }
+
+        public ActionResult LogsApplyFilter(String Code)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<SelectListItem> LOgfilteritems = new List<SelectListItem>()
+                    {
+                        new SelectListItem{ Text="All", Value="All"},
+                        new SelectListItem{ Text="Available Books", Value="Available"},
+                        new SelectListItem{ Text="Issued Books", Value="Book Issued"}
+                    };
+
+            ViewData["LOgfilteritems"] = LOgfilteritems;
+            if (Code == "All")
+            {
+                List<LR_Books> req = db.LR_Books.ToList();
+                return PartialView("_BookReorts", req);
+            }
+            List<LR_Books> item = db.LR_Books.Where(x => x.status == Code).ToList();
+            return PartialView("_BookReorts", item);
+        }
+    }
+}

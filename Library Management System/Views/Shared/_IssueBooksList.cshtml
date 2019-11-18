@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Issue>
+@foreach (var item in Model)
+{
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.student_id)
+    </td>
+    <td>
+        @if (item.artCat_id == 1)
+        {
+
+            @Html.DisplayFor(modelItem => item.ISBN)
+
+        }
+        else
+        {
+            <p>-----</p>
+        }
+    </td>
+    <td>
+        @if (item.artCat_id != 1)
+        {
+
+            @Html.DisplayFor(modelItem => item.title)
+
+        }
+        else
+        {
+            <p> -----</p>
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.author_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.artCat.catname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Issue_Date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ExpiryDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Remaining_Quanity)
+    </td>
+    <td>
+        @*@Html.ActionLink("Edit", "Edit", new { id = item.id }) |*@
+        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+    </td>
+</tr>
+}

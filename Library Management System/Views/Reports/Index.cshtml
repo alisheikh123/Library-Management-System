@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Books>
+
+@{
+    ViewBag.Title = "Reports";
+}
+
+<div class="row">
+    <div class="col-xs-4 col-md-4">
+        <div class="box box-default">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Search Books</label>
+                            <div class="input-group img-responsive">
+                                @Html.DropDownList("LOgfilteritems", null, new { @class = "selectpicker", @onchange = "LogsApplyFilter()" })
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table style="width:100%;" class="table-responsive table-condensed table-bordered table-hover table-striped">
+        <thead class="table-header">
+            <tr class=" headingStyle label-primary">
+                <th>
+                    <strong>
+                        ISBN
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Name
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Author Name
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Publisher Name
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Cost
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Purchase Date
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Date of Publication
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Status
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Article Category
+                    </strong>
+                </th>
+                <th>
+                    <strong>
+                        Action
+                    </strong>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody class="table-body" id="tablebody">
+            @Html.Partial("_BookReorts", Model)
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<script>
+
+    function LogsApplyFilter() {
+        var s = $('#LOgfilteritems').val();
+        $.ajax({
+            url: '/Reports/LogsApplyFilter',
+            type: "GET",
+            dataType: "text",
+            data: { code: s },
+            success: function (newmodel) {
+
+                $("#tablebody").empty().append(newmodel);
+            }
+        });
+    }
+
+</script>

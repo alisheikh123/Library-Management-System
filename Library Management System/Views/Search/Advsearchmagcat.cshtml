@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_JournalsNews>
+
+@{
+    ViewBag.Title = "";
+}
+
+
+@using (Html.BeginForm("AdvanceSearchJournal", "Search", FormMethod.Get))
+{
+
+    <div class="row">
+        <div class="col-xs-7 col-md-7">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Advance Search</label>
+                                <div class="input-group img-responsive">
+                                    <div style="background-color: #95b0d6;
+                                    height: 3px;">
+                                    </div>
+                                    <br /><b> Search By: </b><br />
+                                    @Html.RadioButton("option", "Name")
+                                    <text style="margin-right:90px;">Name</text>
+
+                                    @Html.RadioButton("option", "PublisherName")
+                                    <text>Publisher</text><br /><br />
+
+                                    @Html.RadioButton("option", "ArticleCategory")
+                                    <text style="margin-right:34px;">Article Category</text>
+
+                                    @Html.RadioButton("option", "Author")
+                                    <text>Author</text><br /><br />
+                                    @Html.TextBox("search")
+                                    <input type="submit" name="submit" value="Search" />
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Filter By Status</label>
+                                <div class="input-group img-responsive">
+
+                                    @Html.DropDownList("LOgfilteritems", null, new { @class = "selectpicker", @onchange = "LogsApplyFilter()" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="dropdown">
+                                <button class="btn btn-warning dropdown-toggle" style="margin-top:20px;" type="button" data-toggle="dropdown">
+                                    Search Type
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="~/BookIssue/AdvanceSearch" id="books">Book</a></li>
+                                    <li><a href="~/Search/AdvsearchNewcat">Newspaper</a></li>
+                                    <li><a href="~/Search/Advsearchmagcat">Magazine</a></li>
+                                    <li><a href="~/Search/AdvSearchJoucat">Journal</a></li>
+                                    <li><a href="~/Search/AdvSearchtcat">Thesis</a></li>
+                                    <li><a href="~/Search/advfypviewcat">FYP Reports</a></li>
+                                    <li><a href="~/Search/advcdviewcat">CD/Video Cassettes </a></li>
+                                    <li><a href="~/Search/advnovelviewcat">Novels</a></li>
+                                    <li><a href="~/Search/advpamphletscat">Pamphlets</a></li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@*<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#reqtbl').DataTable();
+        });
+    </script>*@
+<html>
+<body>
+
+    <div class="form-basic">
+
+
+
+        <div class="table-responsive">
+            <table style="width:100%;" class="table-responsive table-condensed table-bordered table-hover table-striped" id="reqtbl">
+                <thead class="table-header" style="color:#3AAFA9;">
+                    <tr class=" headingStyle label-primary">
+
+                        <th>
+                            <strong>
+                                Title
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Publisher
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Article Category
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Author
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Cost
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Total Quantity
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Remaining Quantity
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Status
+                            </strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="tablebody">
+                    @Html.Partial("_ADVJournalSearchingList", Model)
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<script>
+
+    function LogsApplyFilter() {
+        var s = $('#LOgfilteritems').val();
+        $.ajax({
+            url: '/Search/LogsApplyFilter1',
+            type: "GET",
+            dataType: "text",
+            data: { code: s },
+            success: function (newmodel) {
+
+                $("#tablebody").empty().append(newmodel);
+            }
+        });
+    }
+
+</script>
+
+

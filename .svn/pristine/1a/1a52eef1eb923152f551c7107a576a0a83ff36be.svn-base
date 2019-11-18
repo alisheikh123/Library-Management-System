@@ -1,0 +1,196 @@
+﻿@model Library_Management_System.Models.LR_Books
+
+@{
+    ViewBag.Title = "Add Newspaper";
+}
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Newspaper</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="box box-default">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="box-body">
+                        <h4>Add Newspaper</h4>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Bill Number</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-server"></i>
+                                        </div>
+                                        @Html.EditorFor(model => model.Bill_num, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Bill_num, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Book Title</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-window-maximize"></i>
+                                        </div>
+                                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:0px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-server"></i>
+                                    </div>
+
+                                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Edition</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-server"></i>
+                                    </div>
+                                    @Html.EditorFor(model => model.edition, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.edition, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Cost</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-server"></i>
+                                    </div>
+                                    @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row" style="margin-left:0px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Publication Date </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-server"></i>
+                                    </div>
+                                    @Html.EditorFor(model => model.date_year_ofpublication, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.date_year_ofpublication, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Purchase Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-server"></i>
+                                    </div>
+                                    @Html.EditorFor(model => model.purchase_date, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.purchase_date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Publisher Name</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-server"></i>
+                                    </div>
+                                    @Html.EditorFor(model => model.publisher_name, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.publisher_name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:0px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Author Name</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-server"></i>
+                                    </div>
+
+                                    @Html.EditorFor(model => model.author_name, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.author_name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                      
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                @*@{Html.RenderPartial("~/Views/Items/itemlogs.cshtml", new USKTProcurement.Models.PR_InventoryLogs()); }*@
+
+
+
+
+                <div class="row">
+                    <div class="col-md-3  pull-right">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
+

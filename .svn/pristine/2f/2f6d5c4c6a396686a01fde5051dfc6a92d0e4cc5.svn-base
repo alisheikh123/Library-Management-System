@@ -1,0 +1,18 @@
+namespace Library_Management_System.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class Migration5 : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.LR_BooksLogs", "bookid", c => c.Int(nullable: false));
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.LR_BooksLogs", "bookid");
+        }
+    }
+}

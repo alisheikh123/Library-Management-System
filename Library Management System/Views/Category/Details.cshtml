@@ -1,0 +1,56 @@
+﻿@model Library_Management_System.Models.LR_Category
+
+@{
+    ViewBag.Title = "";
+}
+
+
+<link href="~/Content/form.css" rel="stylesheet" />
+<link href="~/Content/table.css" rel="stylesheet" />
+
+
+<div class="row">
+    <div class="col-xs-8 col-md-8">
+        <div class="box box-default" style="align-content:center; margin-left:170px;">
+            <div class="form-basic">
+                <div class="text-body">
+                    <div class="form-title-row">
+                        <h2 style="color:#6caee0">Details</h2>
+                    </div>
+
+                    <hr />
+                    <div class="form-row">
+
+                        <div class="text-row">
+                            <p class="text-element heading">Name:</p>
+
+                            <p>@Html.DisplayFor(model => model.name)</p>
+                        </div>
+
+                        <div class="text-row">
+                            <p class="text-element heading">Shortname:</p>
+
+                            <p>@Html.DisplayFor(model => model.shortname)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Parent:</p>
+
+                            <p>@Html.DisplayFor(model => model.parent)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Date:</p>
+
+                            <p>@Html.DisplayFor(model => model.date)</p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    </div>
+                        <p>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = Model.id }) |*@
+                            @Html.ActionLink("Back to List", "catlist")
+                        </p>

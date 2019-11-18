@@ -1,0 +1,240 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Books>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+
+@using (Html.BeginForm("Searching", "BookIssue", FormMethod.Get))
+{
+
+    <div class="row">
+        <div class="col-xs-6 col-md-6">
+            <div class="box box-default" style="width:550px;">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Search by Title</label>
+                                <div class="input-group img-responsive">
+
+
+                                    @Html.TextBox("search")
+                                    <input type="submit" name="submit" value="Search" style="margin-left:20px;" />
+
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle" type="button"  style="margin-top:20px;"  data-toggle="dropdown">
+                                    Search Type
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="~/BookIssue/Searching" id="books">Book</a></li>
+                                    <li><a href="~/BookIssue/searchNewcat">Newspaper</a></li>
+                                    <li><a href="~/BookIssue/searchmagNew">Magazine</a></li>
+                                    <li><a href="~/BookIssue/searchjouNew">Journal</a></li>
+                                    <li><a href="~/AlliedMaterial/thesisView">Thesis</a></li>
+                                    <li><a href="~/AlliedMaterial/fypview">FYP Reports</a></li>
+                                    <li><a href="~/AlliedMaterial/cdview">CD/Video Cassettes </a></li>
+                                    <li><a href="~/AlliedMaterial/novelview">Novels</a></li>
+                                    <li><a href="~/AlliedMaterial/pamphlets">Pamphlets</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+    
+
+
+
+
+
+
+
+
+
+@*<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $('#reqtbl').DataTable();
+    });
+</script>*@
+<html>
+<body>
+
+    <div class="form-basic" id="divs" >
+       
+
+
+        <div class="table-responsive">
+            <table style="width:100%;" class="table-responsive table-condensed table-bordered table-hover table-striped" id="reqtbl">
+                <thead class="table-header" style="color:#3AAFA9;">
+                    <tr class=" headingStyle label-primary">
+                        <th>
+                            <strong>
+                                ISBN
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Title
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Author Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Publisher Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Cost
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Edition
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Status
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Article Category
+                            </strong>
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="tablebody">
+                    @Html.Partial("_SearchingList", Model)
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<script>
+
+    function BooksApplyFilter() {
+        debugger;
+        var s = $('#BookStatusList').val();
+        $.ajax({
+            url: '/BookIssue/Status',
+            type: "GET",
+            dataType: "text",
+            data: { code: s }, // passs data to server
+            success: function (result) { // revive data from server
+
+                $("#tablebody").empty().append(result);
+            }
+        });
+    }
+
+</script>
+
+
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.author_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.publisher_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cost)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.edition)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.article_category)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.author_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.publisher_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.edition)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.article_category)
+            </td>
+
+
+        </tr>
+        }
+
+    </table>*@
+
+

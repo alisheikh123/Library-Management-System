@@ -1,0 +1,145 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Books>
+
+@{
+    ViewBag.Title = "";
+}
+
+
+@using (Html.BeginForm("Searching", "BookIssue", FormMethod.Get))
+{
+  
+    <div class="row">
+        <div class="col-xs-6 col-md-6">
+            <div class="box box-default" style="width:550px;">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Search</label>
+                                <div class="input-group img-responsive">
+                                    @*<div style="background-color: #95b0d6;
+                                    height: 3px;">
+                                    </div>*@
+                                    @*<br /><b> Search Option: </b>
+                                    @Html.RadioButton("option", "Name")
+                                    <text>Name</text>
+
+                                    @Html.RadioButton("option", "Category")
+                                    <text>Category</text><br /><br />*@
+
+                                    @Html.TextBox("search")
+                                    <input type="submit" name="submit" value="Search" style="margin-left:20px;" />
+                                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.author_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.publisher_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cost)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.edition)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.article_category)
+            </th>
+
+            <th></th>
+        </tr>
+        @*@if (Model.Count() == 0)
+        {
+        <tr> <td colspan="3"> Records not found </td> </tr>
+        }
+        else
+        {*@
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.author_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.publisher_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.edition)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.article_category)
+            </td>
+
+
+        </tr>
+        }
+        @*}*@
+        @*@if (Model.Count() == 0)
+            {
+                <tr> <td colspan="3"> Records not found </td> </tr>
+        }
+        else
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td> @Html.DisplayFor(modelItem =>item.name) </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.article_category)
+                 </tr>
+        }
+        }*@
+    </table>
+
+

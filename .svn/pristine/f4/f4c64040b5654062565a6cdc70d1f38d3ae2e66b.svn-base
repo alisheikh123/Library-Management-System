@@ -1,0 +1,139 @@
+﻿@model Library_Management_System.Models.LR_ReturnBook
+
+@{
+    ViewBag.Title = "";
+}
+
+<p>@ViewBag.Fine</p>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-basic">
+        <div class="row">
+            <div class=" col-md-4">
+                <div class="box box-primary" style="margin-left:220px;">
+                    <div class="text-body" style="margin:10px;">
+                        <h2></h2>
+                        <h3 style="text-align:center;">  Student Details</h3>
+                        @if (ViewBag.Message != null)
+                        {
+                            <p style="color: red; font-style: italic;">
+                                @ViewBag.Message
+                            </p>
+                            // handle refreshing the view, or redirect to another View (window.location.href = "")
+                        }
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label class="form-label"> Student Id:</label>
+                                <div class="input-group col-sm-9" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                    @Html.EditorFor(model => model.student_id, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.student_id, "", new { @class = "text-danger" })
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label class="form-label">ISBN:</label>
+
+                                <div class="col-sm-9" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                    <input id="MagicSuggestionISBN" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-md-3">
+                                    <input type="hidden" name="ISBNID" id="ISBNID" />
+                                </div>
+
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Return " id="Enrolled" class="btn btn-primary btn-submit " style="width: 110px;margin-bottom:15px;margin-left:70px; " />
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "ViewReturnBooks")
+    </div>
+}
+
+
+<input id="BOOKISBN" type="hidden" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/Magicsuggest/magicsuggest.js"></script>
+
+    <script>
+        var dataaaa='';
+
+        //alert(dataaaa);
+        var SMISBN = $('#MagicSuggestionISBN').magicSuggest({
+            allowFreeEntries: false,
+            useZebraStyle: true,
+            strictSuggest: true,
+            minChars: 3,
+
+            minCharsRenderer: function (v) {
+                return 'Be more precise!!';
+            },
+            resultAsString: true,
+            data: '/BookIssue/UserList3',
+             //valueField: 'id',
+            displayField: 'ISBN',
+            maxSuggestions: 20,
+           maxSelection: 1,
+            dataUrlParams: {
+                CourseId: '@ViewBag.courseId',
+                RoleTitle: '@ViewBag.RoleTitle',
+                Selected: function () {
+                    var bb = $("#BOOKISBN").val();
+                        return bb;
+                    }
+            }
+            });
+        $(SMISBN).on('selectionchange', function () {
+                dataaaa = this.getValue();
+            $("#BOOKISBN").val(dataaaa);
+        });
+
+        $("#Enrolled").on('click', function (event) {
+            var SelectedUser = SMISBN.getValue();
+
+            if (SelectedUser == "") {
+                //alert("Enter User Id");
+                $("#error").html("Please Enter a Book");
+                event.preventDefault();
+            }
+            else {
+                $("#ISBNID").val(SelectedUser);
+            }
+        });
+
+    </script>
+}
+
+

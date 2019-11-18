@@ -1,0 +1,43 @@
+﻿<aside class="main-sidebar">
+    <section class="sidebar">
+        @* BEGIN Search *@
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        @* END Search *@
+        @* BEGIN Menu *@
+        <ul id="sidebar-menu" class="sidebar-menu" data-widget="tree">
+            <li class="header">HEADER</li>
+            <li>
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-link"></i> <span>Home</span></a>
+            </li>
+            <li>
+                <a href="@Url.Action("AnotherLink", "Home")"><i class="fa fa-link"></i> <span>Another Link</span></a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-link"></i> <span>Books</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a onclick="trigger(this);" href="~/Home/AddBooks">Add Books</a></li>
+                    <li><a onclick="trigger(this);" href="~/Home/Index">View Books</a></li>
+                    <li><a onclick="trigger(this);" href="~/Category/Index">Define Categories</a></li>
+                    <li><a onclick="trigger(this);" href="~/Category/catlist">View Defined Categories</a></li>
+                    <li><a onclick="trigger(this);" href="~/Category/AddCategory">Add Categories</a></li>
+                    <li><a onclick="trigger(this);" href="~/Category/ViewCat">View Categories</a></li>
+                </ul>
+            </li>
+        </ul>
+        @* END Menu *@
+    </section>
+</aside>

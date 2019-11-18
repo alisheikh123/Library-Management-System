@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_BookCategory>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.book.name)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.book.ISBN)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.category.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Activity)
+    </td>
+    <td>
+
+        @Html.ActionLink("Details", "DetailsViewCat", new { id = item.id }) |
+        @Html.ActionLink("Delete", "DeleteViewCat", new { id = item.id })
+    </td>
+</tr>
+}
+
+

@@ -1,0 +1,363 @@
+﻿@model Library_Management_System.Models.LR_Issue
+
+
+@{
+
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<h2>Issue Newspaper</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-basic">
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="box box-primary" style="margin-left:220px;">
+                    <div class="text-body" style="margin:10px;">
+                        <h2></h2>
+                        <div class="box-body">
+                            <h3 style="text-align:center;">  Student Details</h3>
+                            <input type="hidden" name="artCat_id" value="4" />
+                            @if (ViewBag.InfoMessage != null)
+                            {
+                                <p style="color: red; font-style: italic;">
+                                    @ViewBag.InfoMessage
+                                </p>
+                            }
+                            @if (ViewBag.Remaining != null)
+                            {
+                                <p style="color: red; font-style: italic;">
+                                    @ViewBag.Remaining
+                                </p>
+                            }
+                            @if (ViewBag.Reservation != null)
+                            {
+                                <div id="reserve" class="reserve" onclick="reserve('@ViewBag.title', '@ViewBag.stu_id', '@ViewBag.author', '@ViewBag.cat')" style="cursor:pointer;">
+                                    <p style="color: red;  font-style: italic; cursor: pointer;"></p>
+                                    <div class="isa_info" id="ss" style=" height:85px;text-align:center;border-radius:10px;">
+                                        <i class="fa fa-info-circle"></i>
+                                        <p>Book Already Issued ! Want to Reserve Now?</p>
+                                    </div>
+
+
+                                </div>
+
+                            }
+                            @if (ViewBag.resList != null)
+                            {
+                               
+                                    <div class="isa_info" id="sss" style=" height:85px;text-align:center;border-radius:10px;">
+                                        <i class="fa fa-info-circle"></i>
+                                <p>Reserve Successfully!</p>
+                            </div>
+
+                            
+                        }
+
+                            @if (ViewBag.reMessage != null)
+                            {
+                                <p style="color: red; font-style: italic;">
+                                    @ViewBag.reMessage
+                                </p>
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <p style="color: red; font-style: italic;">
+                                    @ViewBag.ErrorMessage
+                                </p>
+                            }
+
+                            @if (ViewBag.errorllist != null)
+                            {
+                                <p style="color: red; font-style: italic;">
+                                    @ViewBag.errorllist
+                                </p>
+                            }
+                            <div class="form-group">
+                                <label class="form-label"> Student Id:</label>
+                                <div class="col-sm-6" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                    @Html.EditorFor(model => model.student_id, new { htmlAttributes = new { @class = "form-control", @id = "issueBookdiv" } })
+                                    @Html.ValidationMessageFor(model => model.student_id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div style="display:none" id="bookIssue">
+
+                                <h3 style="text-align:center;">Book Details</h3>
+                                <div class="form-group">
+                                    <label class="form-label">Select Magazine:</label>
+
+                                    <div class="col-sm-9" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                        <input id="Magictitle" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Select Author:</label>
+
+                                    <div class="col-sm-9" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                        <input id="Magicauthor" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> Issue Date:</label>
+                                    <div class="col-sm-9" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                        @Html.EditorFor(model => model.Issue_Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.Issue_Date, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label"> Expiry Date:</label>
+                                    <div class="col-sm-9" style="padding: 0px; margin-left:20px; float: none; display: table;">
+                                        @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <div class="col-md-3">
+                                        <input type="hidden" name="name" id="name" />
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-md-3">
+                                        <input type="hidden" name="authorname" id="authorname" />
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Issue " id="enrol" class="btn btn-primary btn-submit " style="width: 110px;margin-bottom:15px;margin-left:120px; " />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+<script>
+
+    function reserve(title, stu_id, author, cat) {
+        var title = title;
+        var stu_id = stu_id;
+        var author = author;
+        var cat = cat;
+        $.ajax({
+            url: "/BookIssue/Reservation",
+            type: "GET",
+            dataType: "text",
+            data: {
+                code: title,
+                id: stu_id,
+                author: author,
+                cat: cat
+            },
+            success: function (data) {
+
+                if (data == true) {
+                    document.getElementById("#reserve").style.display = "none";
+
+                }
+                else {
+                    //document.getElementById("#sss").style.display = "block";
+                    <p>Reserve Successfully!</p>
+                }
+
+
+            }
+
+        });
+
+
+
+    }
+</script>
+
+
+<input id="booktitle" type="hidden" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/Magicsuggest/magicsuggest.js"></script>
+
+    <script>
+        var dataaaa='';
+
+        //alert(dataaaa);
+        var TITLE = $('#Magictitle').magicSuggest({
+            allowFreeEntries: false,
+            useZebraStyle: true,
+            strictSuggest: true,
+            minChars: 3,
+
+            minCharsRenderer: function (v) {
+                return 'Be more precise!!';
+            },
+            resultAsString: true,
+            data: '/BookIssue/UserList7',
+             //valueField: 'id',
+            displayField: 'title',
+            maxSuggestions: 20,
+          maxSelection: 1,
+            dataUrlParams: {
+                CourseId: '@ViewBag.courseId',
+                RoleTitle: '@ViewBag.RoleTitle',
+                Selected: function () {
+                    var bb = $("#booktitle").val();
+                        return bb;
+                    }
+            }
+            });
+        $(TITLE).on('selectionchange', function () {
+                dataaaa = this.getValue();
+            $("#booktitle").val(dataaaa);
+        });
+
+        $("#enrol").on('click', function (event) {
+            var SelectedUser = TITLE.getValue();
+
+            if (SelectedUser == "") {
+                //alert("Enter User Id");
+                $("#error").html("Please Enter a Book");
+                event.preventDefault();
+            }
+            else {
+                $("#name").val(SelectedUser);
+            }
+        });
+
+    </script>
+
+
+
+
+    @*//Magic Suggest for author*@
+    <input id="bookauthor" type="hidden" />
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/Magicsuggest/magicsuggest.js"></script>
+
+    <script>
+        var dataaaa='';
+
+        //alert(dataaaa);
+        var AUTHOR = $('#Magicauthor').magicSuggest({
+            allowFreeEntries: false,
+            useZebraStyle: true,
+            strictSuggest: true,
+            minChars: 3,
+
+            minCharsRenderer: function (v) {
+                return 'Be more precise!!';
+            },
+            resultAsString: true,
+            data: '/BookIssue/UserList8',
+             //valueField: 'id',
+            displayField: 'title',
+            maxSuggestions: 20,
+          maxSelection: 1,
+            dataUrlParams: {
+                CourseId: '@ViewBag.courseId',
+                RoleTitle: '@ViewBag.RoleTitle',
+                Selected: function () {
+                    var bb = $("#bookauthor").val();
+                        return bb;
+                    }
+            }
+            });
+        $(AUTHOR).on('selectionchange', function () {
+                dataaaa = this.getValue();
+            $("#bookauthor").val(dataaaa);
+        });
+
+        $("#enrol").on('click', function (event) {
+            var SelectedUser = AUTHOR.getValue();
+
+            if (SelectedUser == "") {
+                //alert("Enter User Id");
+                $("#error").html("Please Enter a Book");
+                event.preventDefault();
+            }
+            else {
+                $("#authorname").val(SelectedUser);
+            }
+        });
+
+    </script>
+
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    $("#issueBookdiv").keypress(function (e) {
+        if (e.which == 13) {
+            var parent = $(this).val();
+
+
+            $.ajax({
+                url: "/BookIssue/CheckIssueLimit",
+                type: "GET",
+                dataType: "text",
+                data: { code: parent },
+                success: function (data) {
+
+                    if (data == "True") {
+                        alert("Limit Exceed,You have already issued max no of  books !");
+                        document.getElementById("bookIssue").style.display = "none";
+
+                    }
+                    else if (data == "False") {
+                        // alert("working fine :)");
+                        document.getElementById("bookIssue").style.display = "block";
+                    }
+
+
+                }
+
+            });
+
+        }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+
+        $("#ss").click(function () {
+            console.log("Yes");
+            $(this).hide();
+           
+            $("#success").show(1000);
+           
+            
+
+        });
+        $("#ss").mouseenter(function () {
+            $("#ss").css("color", "white");
+        });
+        $("#ss").mouseleave(function () {
+            $("#ss").css("color", "#337ab7");
+        });
+
+    });
+
+</script>

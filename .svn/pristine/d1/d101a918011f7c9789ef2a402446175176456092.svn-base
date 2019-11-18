@@ -1,0 +1,94 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Library_Management_System.Models
+{
+    public class LR_Issue
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int issueid { get; set; }
+
+        [Display(Name = "Issuence No:")]
+        [Required(ErrorMessage = "Enter the Issuence No *")]
+        public int issuenceNo { get; set; }
+
+        [Display(Name = "ISBN:")]
+        [Required(ErrorMessage = "Enter the ISBN *")]
+        public int isbn { get; set; }
+
+
+        [Display(Name = "Student ID:")]
+        [Required(ErrorMessage = "Enter Student Id *")]
+        public int stdid { get; set; }
+
+        [Display(Name = "Staff ID:")]
+        public int? staffid { get; set; }
+
+        [Display(Name = "Issue Date:")]
+        [Required(ErrorMessage = "Enter Issue Date *")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime issuedate { get; set; }
+
+
+        [Display(Name = "Date To be Returned:")]
+        [Required(ErrorMessage = "Enter Date To be Returned")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime returndate { get; set; }
+
+        [Display(Name = "Book Returned:")]
+        [Required(ErrorMessage = "Please mark the Checkbox(if book received) *")]
+        public bool isreturned { get; set; }
+
+        [Display(Name = "Reissue:")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? reissue { get; set; }
+
+        [Display(Name = "Reissue2:")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? reissue2 { get; set; }
+
+        [Display(Name = "Reissue3:")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? reissue3 { get; set; }
+
+        [Display(Name = "Book Return Date:")]
+        [Required(ErrorMessage = "Enter the Book Return Date *")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime returnedDate { get; set; }
+
+        [Display(Name = "Book Issued By:")]
+        [Required(ErrorMessage = "Enter issued person name *")]
+        public string issuedBy { get; set; }
+
+        [Display(Name = "Book Issued On:")]
+        [Required(ErrorMessage = "Please enter book issued date *")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime issuedOn { get; set; }
+
+        [Display(Name = "Book Recieved By:")]
+        public string recievedby { get; set; }
+
+        [Display(Name = "Book Recieved On:")]
+        [Required(ErrorMessage = "Enter the Book Received Date *")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? recivedDate { get; set; }
+
+        [Display(Name = "Total Fine:")]
+        public decimal? fineDue { get; set; }
+
+        [Display(Name = "Fine Recieved:")]
+        public decimal? fineRecieved { get; set; }
+    }
+}

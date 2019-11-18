@@ -1,0 +1,48 @@
+namespace Library_Management_System.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class Migration1 : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.LR_Books",
+                c => new
+                    {
+                        id = c.Int(nullable: false, identity: true),
+                        ISBN = c.Int(nullable: false),
+                        name = c.String(),
+                        author_name = c.String(),
+                        publisher_name = c.String(),
+                        year_of_publication = c.DateTime(nullable: false),
+                        cost = c.Single(nullable: false),
+                        purchase_date = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.id);
+            
+           
+        }
+        
+        public override void Down()
+        {
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.LR_Books");
+        }
+    }
+}

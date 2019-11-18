@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Library_Management_System.Models.LR_Books>
+
+@{
+    ViewBag.Title = "List of All Books";
+}
+
+<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#reqtbl').DataTable();
+    });
+</script>
+
+<html>
+<body>
+
+    <div class="form-basic">
+        <p data_toggle="tooltip" title="Create new books">
+            <button id="btn" class="btn  btn-warning">Create new</button>
+        </p>
+        @*<p style="text-align:left;">
+                @Html.ActionLink("Create New", "AddBooks")
+            </p>*@
+
+
+
+        <div class="table-responsive">
+            <table style="width:100%;" class="table-responsive table-condensed table-bordered table-hover table-striped" id="reqtbl">
+                <thead class="table-header">
+                    <tr class=" headingStyle label-primary">
+                        <th>
+                            <strong>
+                                ISBN
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Title
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Author Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Publisher Name
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Cost
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Purchase Date
+                            </strong>
+                        </th>
+                        <th>
+                            <strong>
+                                Action
+                            </strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="tablebody">
+                    @Html.Partial("_BooksList", Model)
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <div id="myModalSave" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select Category</h4>
+                </div>
+                <div class="modal-body" style="padding:30px">
+                    @using (Html.BeginForm("CreateNewBooks", "Home", null, FormMethod.Post, null))
+                    {
+                    <div class="form-group">
+                        <label>Category</label>
+                        @Html.Partial("_Artcategory")
+                    </div>
+                    <br />
+                        <button type="submit" id="btnSave" class="btn btn-success">Create</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+<script src="~/Content/jquery-ui-1.12.1/jquery-ui.js"></script>
+<script src="~/Content/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).on("click", "#btn", function () {
+        $('#myModalSave').modal('hide');
+        $('#myModalSave').modal();
+    });
+
+</script>
+
+
+
+

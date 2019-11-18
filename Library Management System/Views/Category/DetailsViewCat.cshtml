@@ -1,0 +1,108 @@
+﻿@model Library_Management_System.Models.LR_BookCategory
+
+@{
+    ViewBag.Title = "";
+}
+
+
+
+
+
+
+<link href="~/Content/form.css" rel="stylesheet" />
+<link href="~/Content/table.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-xs-4 col-md-7">
+        <div class="box box-default" style="align-content:center; margin-left:200px;">
+            <div class="form-basic">
+                <div class="text-body">
+                    <div class="form-title-row">
+                        <h2 style="color:#6caee0">Details</h2>
+                    </div>
+
+                    <hr />
+                    <div class="form-row">
+
+                        <div class="text-row">
+                            <p class="text-element heading">Title</p>
+
+                            <p class="text-element">   @Html.DisplayFor(model => model.book.name)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Article Category</p>
+
+                            <p class="text-element">   @Html.DisplayFor(model => model.book.article_category)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Status</p>
+
+                            <p class="text-element">   @Html.DisplayFor(model => model.book.status)</p>
+                        </div>
+                        <div class="text-row">
+                            <p class="text-element heading">Type Category</p>
+
+                            <p class="text-element">    @Html.DisplayFor(model => model.category.name)</p>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <p style="text-align:left">
+            @Html.ActionLink("Back to List", "ViewCat")
+        </p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<h2>DetailsViewCat</h2>
+
+    <div>
+        <h4>LR_BookCategory</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+              Title
+            </dt>
+
+            <dd>
+             @Html.DisplayFor(model => model.book.name)
+            </dd>
+
+            <dt>
+                Category
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.category.name)
+            </dd>
+
+            <dt>
+               Date:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.date)
+            </dd>
+
+        </dl>
+    </div>
+    <p>*@
+      

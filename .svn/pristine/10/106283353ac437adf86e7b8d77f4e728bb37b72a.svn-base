@@ -1,0 +1,129 @@
+﻿using Library_Management_System.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Library_Management_System.Controllers
+{
+    public class BookIssueController : Controller
+    {
+        private ApplicationDbContext db = new ApplicationDbContext();
+        public ActionResult Index()
+        {
+            List<LR_Issue> list = db.LR_Issue.ToList();
+            return View(list);
+        }
+
+        // GET: BookIssue
+        public ActionResult BookIssue()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult BookIssue(LR_Issue model)
+        {
+            //  model.date = DateTime.Now;
+            LR_Books model2 = db.LR_Books.Where(x => x.ISBN == model.ISBN).FirstOrDefault();
+            model2.status = "Book Issued";
+            model.Status = "Book Issued";
+
+            db.LR_Issue.Add(model);
+            db.Entry(model2).State = EntityState.Modified;
+
+            db.SaveChanges();
+           
+
+            return RedirectToAction("BookIssue");
+        }
+
+
+
+
+
+        // For select Search
+           [HttpPost]
+        public JsonResult Index2(string keyword, int courseId)
+        {
+            List<LR_Books> list = new List<LR_Books>();
+
+            if (Session["userList"] == null)
+            {
+                UserSession();
+            }
+            list = (List<LR_Books>)Session["userList"];
+
+
+
+
+            var result = (from a in list where a.name.ToLower().StartsWith(keyword.ToLower()) select new { a.name });
+
+
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        
+        public JsonResult UserList()
+        {
+            List<string> list = new List<string>();
+
+            if (Session["bookList"] == null)
+            {
+                UserSession();
+            }
+            list = (List<string>)Session["bookList"];
+            //var result = list.Select(n => n.UserName).ToArray();
+
+
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public void UserSession()
+        {
+            var _context = new ApplicationDbContext();
+            //  var UserManager = new UserManager<ApplicationUser>(new UserStore<LR_Books>(_context));
+
+            List<string> list = db.LR_Books.Select(x=> x.name).ToList();
+           
+            Session["bookList"] = list;
+
+        }
+
+
+
+
+        // Retun Book
+        public ActionResult ReturnBooks()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ReturnBooks(LR_ReturnBook model,FormCollection  from)
+        {
+//            SELECT DATEDIFF(d, IssueDate, ReturnDate) *10 as Fine from tbl_LibraryBookIssue
+//WHERE DATEDIFF(d, IssueDate, ReturnDate) > 11
+
+            LR_Books model2 = 
+            db.LR_Books.Where(x => x.ISBN == model.ISBN).FirstOrDefault();
+            model2.status = "Book Available";
+            db.Entry(model2).State = EntityState.Modified;
+            model.Status = "Book Returned";
+            db.LR_ReturnBook.Add(model);
+           db.SaveChanges();
+           return RedirectToAction("ReturnBooks");
+        }
+
+        public ActionResult ViewReturnBooks()
+        {
+           
+            List<LR_ReturnBook> list = db.LR_ReturnBook.ToList();
+            return View(list);
+        }
+
+
+       
+    }
+}

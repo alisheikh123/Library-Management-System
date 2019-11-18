@@ -1,0 +1,362 @@
+﻿using Library_Management_System.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Library_Management_System.Controllers
+{
+    public class BookIssueController : Controller
+    {
+        int fin;
+        private ApplicationDbContext db = new ApplicationDbContext();
+        public ActionResult Index()
+        {
+            List<LR_Issue> list = db.LR_Issue.ToList();
+            return View(list);
+        }
+
+        // GET: BookIssue
+        public ActionResult BookIssue()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult BookIssue(LR_Issue model)
+        {
+            //  model.date = DateTime.Now;
+            
+            LR_Books model2 = db.LR_Books.Where(x => x.ISBN == model.ISBN).FirstOrDefault();
+            DateTime datIss = model.Issue_Date;
+            DateTime datExp = model.ExpiryDate;
+            if (model2 != null)
+            {
+                if (datIss < datExp)
+                {
+                    if (model2.status == "Available" || model2.status == "Book Returned")
+                    {
+                        model2.status = "Book Issued";
+                        model.Status = "Book Issued";
+
+                        db.LR_Issue.Add(model);
+                        db.Entry(model2).State = EntityState.Modified;
+
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+
+                    else
+                    {
+                        ViewBag.ErrorMessage = "The selected book is already Issued!";
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Expiry date is less then issue date";
+                    return View(model);
+                }
+
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "No such book available!";
+                return View(model);
+            }
+
+
+        }
+
+
+
+
+
+        // For select Search
+        [HttpPost]
+        public JsonResult Index2(string keyword, int courseId)
+        {
+            List<LR_Books> list = new List<LR_Books>();
+
+            if (Session["userList"] == null)
+            {
+                UserSession();
+            }
+            list = (List<LR_Books>)Session["userList"];
+
+
+
+
+            var result = (from a in list where a.name.ToLower().StartsWith(keyword.ToLower()) select new { a.name });
+
+
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UserList()
+        {
+            List<string> list = new List<string>();
+
+            if (Session["bookList"] == null)
+            {
+                UserSession();
+            }
+            list = (List<string>)Session["bookList"];
+            //var result = list.Select(n => n.UserName).ToArray();
+
+
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public void UserSession()
+        {
+            var _context = new ApplicationDbContext();
+            //  var UserManager = new UserManager<ApplicationUser>(new UserStore<LR_Books>(_context));
+
+            List<string> list = db.LR_Books.Select(x => x.name).ToList();
+
+            Session["bookList"] = list;
+
+        }
+
+
+
+
+        // Retun Book
+        public ActionResult ReturnBooks()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ReturnBooks(LR_ReturnBook model, FormCollection from)
+        {
+            //            SELECT DATEDIFF(d, IssueDate, ReturnDate) *10 as Fine from tbl_LibraryBookIssue
+            //WHERE DATEDIFF(d, IssueDate, ReturnDate) > 11
+            if (model.student_id == null)
+            {
+                ViewBag.Message = "Please Enter Student Id";
+            }
+            else
+            {
+                var amount = 30;
+                var res = db.LR_Issue.Where(x => x.student_id == model.student_id && x.ISBN == model.ISBN).FirstOrDefault();
+                TimeSpan day;
+
+                DateTime datI = res.Issue_Date;
+                DateTime datR = res.ExpiryDate;
+                DateTime datD = DateTime.Now;
+                if (datR < datD)
+                {
+                    day = datD.Subtract(datR);
+                    int d = day.Days;
+                    fin = d * amount;
+
+                    //return View(model);
+                }
+
+
+
+                ViewBag.fine = fin;
+                LR_Books model2 =
+                db.LR_Books.Where(x => x.ISBN == model.ISBN).FirstOrDefault();
+                model2.status = "Available";
+                db.Entry(model2).State = EntityState.Modified;
+                model.Status = "Available";
+                model.DueDate = datR;
+                model.Issue_Date = datI;
+                model.returnedDate = datD;
+                model.fine = fin;
+                db.LR_ReturnBook.Add(model);
+                db.SaveChanges();
+            }
+                return RedirectToAction("ReturnBooks");
+            
+        }
+
+        public ActionResult ViewReturnBooks()
+        {
+
+            List<LR_ReturnBook> list = db.LR_ReturnBook.ToList();
+            return View(list);
+        }
+
+        public ActionResult Searching(string option, string search)
+        {
+            return View(db.LR_Books.Where(x => x.name.StartsWith(search) || search == null).ToList());
+
+        }
+
+        public ActionResult AdvanceSearch(string option, string search)
+        {
+            if (option == "Name")
+            {
+                //Index action method will return a view with a student records based on what a user specify the value in textbox  
+                return View(db.LR_BookCategory.Where(x => x.book.name.StartsWith(search) || search == null).ToList());
+            }
+            else if (option == "TypeCategory")
+            {
+                return View(db.LR_BookCategory.Where(x => x.book.type_category.StartsWith(search) || search == null).ToList());
+            }
+            else if (option == "ArticleCategory")
+            {
+                return View(db.LR_BookCategory.Where(x => x.book.article_category == search || search == null).ToList());
+            }
+            else if (option == "Author")
+            {
+                return View(db.LR_BookCategory.Where(x => x.book.author_name.StartsWith(search) || search == null).ToList());
+            }
+            else
+            {
+                return View(db.LR_BookCategory.Where(x => x.book.name.StartsWith(search) || search == null).ToList());
+            }
+            //List<LR_BookCategory> list = db.LR_BookCategory.ToList();
+            //return View(list);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_Issue cat = db.LR_Issue.Find(id);
+            if (cat == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(cat);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(LR_Issue cat)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                db.Entry(cat).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Edit");
+            }
+            return View(cat);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_Issue cat = db.LR_Issue.Find(id);
+            if (cat == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cat);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            LR_Issue cat = db.LR_Issue.Find(id);
+            db.LR_Issue.Remove(cat);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_Issue book = db.LR_Issue.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+            return View(book);
+        }
+
+
+        //Crud Operations for Book Returns
+        public ActionResult ReturnEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_ReturnBook cat = db.LR_ReturnBook.Find(id);
+            if (cat == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(cat);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReturnEdit(LR_Issue cat)
+        {
+            if (ModelState.IsValid)
+            {
+
+                db.Entry(cat).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Edit");
+            }
+            return View(cat);
+        }
+
+        public ActionResult ReturnDelete(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_ReturnBook cat = db.LR_ReturnBook.Find(id);
+            if (cat == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cat);
+        }
+        [HttpPost, ActionName("ReturnDelete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReturnDeleteConfirmed(int id)
+        {
+            LR_ReturnBook cat = db.LR_ReturnBook.Find(id);
+            db.LR_ReturnBook.Remove(cat);
+            db.SaveChanges();
+            return RedirectToAction("ViewReturnBooks");
+        }
+
+
+
+        public ActionResult ReturnDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LR_ReturnBook book = db.LR_ReturnBook.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+            return View(book);
+        }
+
+    }
+}
