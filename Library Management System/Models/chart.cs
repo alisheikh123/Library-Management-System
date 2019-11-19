@@ -9,18 +9,10 @@ namespace Library_Management_System.Models
 {
     public class chart
     {
-
-        public chart(double y, string label)
-        {
-            this.Y = y;
-            this.label = label;
-        }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
-
         public string label { get; set; }
+        public int y { get; set; }
 
-      
-        public double Y { get; private set; }
+
+    
     }
 }

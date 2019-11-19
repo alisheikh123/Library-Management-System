@@ -10,10 +10,16 @@ namespace Library_Management_System.Models
     {
          public int id { get; set; }
          public int user { get; set; }
-         public int usercategory_id { get; set; }
+
+        public string StudentName { get; set; }
+        public int usercategory_id { get; set; }
         [ForeignKey("usercategory_id ")]
         public virtual LR_UserCategory category { get; set; }
          public int priority { get; set; }
         public DateTime? date { get; set; }
+
+
+        [ForeignKey("user")]
+        public LR_AssignRolestoUsers lR_AssignRolestoUsers { get; set; }
     }
 }

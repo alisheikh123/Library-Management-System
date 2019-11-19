@@ -1,5 +1,5 @@
 ﻿using Library_Management_System.Models;
-using Library_Management_System.ViewModel;
+
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -74,27 +74,23 @@ namespace Library_Management_System.Controllers
             ViewBag.ReturnBooksCount = db.LR_Issue.Where(x => x.Status == "Available").Count();
 
 
-            //List<DataPointcs> dataPoints = new List<DataPointcs>();
+           
 
-            //dataPoints.Add(new DataPointcs("Economics", 1));
-            //dataPoints.Add(new DataPointcs("Physics", 2));
-            //dataPoints.Add(new DataPointcs("Literature", 4));
-            //dataPoints.Add(new DataPointcs("Chemistry", 4));
-            //dataPoints.Add(new DataPointcs("Literature", 9));
-            //dataPoints.Add(new DataPointcs("Physiology or Medicine", 11));
-            //dataPoints.Add(new DataPointcs("Peace", 13));
-
-            var student = db.LR_Issue.Where(x => x.Status == "Book Issued").GroupBy(x => x.title).ToList();
-            foreach (var item in student)
-            {
-                ViewBag.name = item.Key;
-                string Name = item.Key;
-                int Count = item.Key.Count();
-                
-                
+            var booksIssued = db.LR_Issue.Where(x => x.Status == "Book Issued").GroupBy(x => x.title).ToList();
             
-            ViewBag.DataPoints = JsonConvert.SerializeObject(BookIssued.GetRandomDataForCategoryAxis(Count,Name), _jsonSetting);
+            List<chart> li = new List<chart>();
+            foreach (var item in booksIssued)
+            {
+                
+                chart obj = new chart();
+                obj.label = item.Key;
+                ViewBag.label = item.Key;
+                obj.y = item.Key.Count();
+
+                li.Add(obj);
             }
+            
+            ViewBag.DataPoints = JsonConvert.SerializeObject(li, _jsonSetting);
 
 
 
@@ -116,16 +112,7 @@ namespace Library_Management_System.Controllers
            
             model.article_category = "Magazine";
             var chkmag = db.LR_Books.Where(x => x.name == model.name).ToList();
-            //var chkissn = db.LR_Books.Where(x => x.ISSN == model.ISSN).ToList();
-
-            //if (chkmag.Count > 0 && chkissn.Count > 0)
-
-            //{
-            //    ViewBag.warning = "This book already exists";
-            //    return View();
-            //}
-            //else
-            //{
+          
                 db.LR_Books.Add(model);
                 db.SaveChanges();
                 SaveMagazineLogs(model);

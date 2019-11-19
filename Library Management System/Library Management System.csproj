@@ -197,6 +197,7 @@
     <Compile Include="Controllers\FinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JournalNewsController.cs" />
+    <Compile Include="Controllers\LR_AssignRolestoUsersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -207,6 +208,14 @@
     <Compile Include="Migrations\201911130826313_15.cs" />
     <Compile Include="Migrations\201911130826313_15.Designer.cs">
       <DependentUpon>201911130826313_15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911190538159_13.cs" />
+    <Compile Include="Migrations\201911190538159_13.Designer.cs">
+      <DependentUpon>201911190538159_13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911191021399_12.cs" />
+    <Compile Include="Migrations\201911191021399_12.Designer.cs">
+      <DependentUpon>201911191021399_12.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -241,7 +250,6 @@
     <Compile Include="Models\LR_Reservations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\BookIssued.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -615,6 +623,11 @@
     <Content Include="Views\Search\AdvanceSearchJournal.cshtml" />
     <Content Include="Views\Shared\_CategoryList.cshtml" />
     <Content Include="Views\Home\Dasboard.cshtml" />
+    <Content Include="Views\LR_AssignRolestoUsers\Create.cshtml" />
+    <Content Include="Views\LR_AssignRolestoUsers\Delete.cshtml" />
+    <Content Include="Views\LR_AssignRolestoUsers\Details.cshtml" />
+    <Content Include="Views\LR_AssignRolestoUsers\Edit.cshtml" />
+    <Content Include="Views\LR_AssignRolestoUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -635,6 +648,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911130826313_15.resx">
       <DependentUpon>201911130826313_15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911190538159_13.resx">
+      <DependentUpon>201911190538159_13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911191021399_12.resx">
+      <DependentUpon>201911191021399_12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

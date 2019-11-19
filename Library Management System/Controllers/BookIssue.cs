@@ -93,7 +93,7 @@ namespace Library_Management_System.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //  model.date = DateTime.Now;
+                    
                      CAT = form["ISBNID"];
                     auth = form["authorname"];
 
@@ -209,7 +209,9 @@ namespace Library_Management_System.Controllers
             }
             else
             {
-                ModelState.AddModelError("student_id", "Student_Id does not exists.");
+                ViewBag.error = "Student ID Does not Exist!";
+              // ModelState.AddModelError("student_id", "Student_Id does not exists.");
+
             }
 
        
