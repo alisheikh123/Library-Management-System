@@ -1,0 +1,32 @@
+﻿
+@model IEnumerable<Library_Management_System.Models.LR_Issue>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.student_id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.book_title)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Issue_Date)
+            </td>
+
+
+
+        
+        </tr>
+    }
+
+</table>

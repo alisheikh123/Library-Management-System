@@ -15,9 +15,11 @@ namespace Library_Management_System.Models
         public int artCat_id { get; set; }
         [ForeignKey("artCat_id")]
         public virtual LR_ArticleCategory artCat { get; set; }
-        [Required]
+       
       
-        public int? student_id { get; set; }
+        public int student_id { get; set; }
+     
+
         public string Department { get; set; }
 
         public string book_title { get; set; }
@@ -32,6 +34,9 @@ namespace Library_Management_System.Models
         public string activity { get; set; }
         public string Status { get; set; }
         public int Remaining_Quanity { get; set; }
+
+
+        
 
 
         

@@ -19,7 +19,6 @@ namespace Library_Management_System.Models
         public DateTime? date { get; set; }
 
 
-        [ForeignKey("user")]
-        public LR_AssignRolestoUsers lR_AssignRolestoUsers { get; set; }
+        
     }
 }

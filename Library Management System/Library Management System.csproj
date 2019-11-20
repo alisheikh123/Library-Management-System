@@ -217,6 +217,18 @@
     <Compile Include="Migrations\201911191021399_12.Designer.cs">
       <DependentUpon>201911191021399_12.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911200450389_11.cs" />
+    <Compile Include="Migrations\201911200450389_11.Designer.cs">
+      <DependentUpon>201911200450389_11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911200602299_14.cs" />
+    <Compile Include="Migrations\201911200602299_14.Designer.cs">
+      <DependentUpon>201911200602299_14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911200635167_222.cs" />
+    <Compile Include="Migrations\201911200635167_222.Designer.cs">
+      <DependentUpon>201911200635167_222.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddBook.cs" />
@@ -628,6 +640,8 @@
     <Content Include="Views\LR_AssignRolestoUsers\Details.cshtml" />
     <Content Include="Views\LR_AssignRolestoUsers\Edit.cshtml" />
     <Content Include="Views\LR_AssignRolestoUsers\Index.cshtml" />
+    <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\Shared\_IssuedBooksRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -654,6 +668,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911191021399_12.resx">
       <DependentUpon>201911191021399_12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911200450389_11.resx">
+      <DependentUpon>201911200450389_11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911200602299_14.resx">
+      <DependentUpon>201911200602299_14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911200635167_222.resx">
+      <DependentUpon>201911200635167_222.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

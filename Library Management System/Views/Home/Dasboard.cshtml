@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Library_Management_System.Models.LR_Issue>
+
+
+
 @{
 
 }
@@ -60,235 +63,149 @@
     @* chart *@
     <div id="chartContainer" style="height: 470px; width: 100%;"></div>
 
-    @* Record Dues *@
+
+
+
+
+
+
+
+
+
+    <br />
+
+    <br />
+    @* Today Dues *@
+
 
     <div class="row">
-        <div class="col-md-6 col-xs-12">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-danger">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Today Dues</h3>
-                            <div class="box-tools pull-right">
-                                <span id="incomplete Attendence"><strong>0</strong></span>
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body no-padding">
-                            <div style="padding-right: 1%; padding-left: 1%; padding-bottom: 1%; padding-top: 1%;">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12">
-                                        <div id="IncompleteAttendence_wrapper" class="dataTables_wrapper no-footer">
-                                            <div class="dataTables_length" id="IncompleteAttendence_length"><label>Show <select name="IncompleteAttendence_length" aria-controls="IncompleteAttendence" class=""><option value="4">4</option><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="-1">All</option></select> entries</label></div><div id="IncompleteAttendence_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="IncompleteAttendence"></label></div><div class="dataTables_scroll">
-                                                <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;">
-                                                    <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 775px; padding-right: 0px;">
-                                                        <table class="table table-responsive table-striped employeecheck dataTable no-footer" cellspacing="0" cellpadding="0" style="width: 775px; border-collapse: separate; margin-left: 0px;" role="grid">
-                                                            <thead>
-                                                                <tr role="row">
-                                                                    <th style="color: black; border-width: 2px 0px; border-style: solid; border-color: rgb(221, 75, 57); font-weight: bold; width: 137px;" class="sorting_asc" tabindex="0" aria-controls="IncompleteAttendence" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
-                                                    Name
-                                                : activate to sort column descending">
-                                                                        Name
-                                                                    </th>
-                                                                    <th style="color: black; border-width: 2px 0px; border-style: solid; border-color: rgb(221, 75, 57); font-weight: bold; width: 118px;" class="sorting" tabindex="0" aria-controls="IncompleteAttendence" rowspan="1" colspan="1" aria-label="
-                                                    Reg. No.
-                                                : activate to sort column ascending">
-                                                                        Reg. No.
-                                                                    </th>
-                                                                    <th style="color: black; border-width: 2px 0px; border-style: solid; border-color: rgb(221, 75, 57); font-weight: bold; width: 232px;" class="sorting" tabindex="0" aria-controls="IncompleteAttendence" rowspan="1" colspan="1" aria-label="
-                                                    Department
-                                                : activate to sort column ascending">
-                                                                        Department
-                                                                    </th>
-                                                                    <th style="color: black; border-width: 2px 0px; border-style: solid; border-color: rgb(221, 75, 57); font-weight: bold; width: 144px;" class="sorting" tabindex="0" aria-controls="IncompleteAttendence" rowspan="1" colspan="1" aria-label="
-                                                    Check In Time
-                                                : activate to sort column ascending">
-                                                                        Check In Time
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                        </table>
-                                                    </div>
-                                                </div><div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%; height: 150px;">
-                                                    <table class="table table-responsive table-striped employeecheck dataTable no-footer" cellspacing="0" cellpadding="0" id="IncompleteAttendence" style="width: 100%; border-collapse: separate;" role="grid" aria-describedby="IncompleteAttendence_info">
-                                                        <thead>
-                                                            <tr role="row" style="height: 0px;">
-                                                                <th style="color: black; border-width: 0px; border-style: solid; border-color: rgb(221, 75, 57); font-weight: bold; width: 137px; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="sorting_asc" aria-controls="IncompleteAttendence" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
-                                                    Name
-                                                : activate to sort column descending">
-                                                                    <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                                        Name
-                                                                    </div>
-                                                                </th>
-                                                                <th style="color: black; border-width: 0px; border-style: solid; border-color: rgb(221, 75, 57); font-weight: bold; width: 118px; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="sorting" aria-controls="IncompleteAttendence" rowspan="1" colspan="1" aria-label="
-                                                    Reg. No.
-                                                : activate to sort column ascending">
-                                                                    <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                                        Reg. No.
-                                                                    </div>
-                                                                </th>
-                                                                <th style="color: black; border-width: 0px; border-style: solid; border-color: rgb(221, 75, 57); font-weight: bold; width: 232px; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="sorting" aria-controls="IncompleteAttendence" rowspan="1" colspan="1" aria-label="
-                                                    Department
-                                                : activate to sort column ascending">
-                                                                    <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                                        Department
-                                                                    </div>
-                                                                </th>
-                                                                <th style="color: black; border-width: 0px; border-style: solid; border-color: rgb(221, 75, 57); font-weight: bold; width: 144px; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="sorting" aria-controls="IncompleteAttendence" rowspan="1" colspan="1" aria-label="
-                                                    Check In Time
-                                                : activate to sort column ascending">
-                                                                    <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                                        Check In Time
-                                                                    </div>
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
+        <div class="col-md-12">
+            <div class="panel panel-danger">
+               <div class="panel-heading" ><h3>Today Dues</h3></div>
 
 
-                                                        <tbody>
+                <div class="panel-body">
 
 
-                                                            <tr class="odd"><td valign="top" colspan="4" class="dataTables_empty">No data available in table</td></tr>
-                                                        </tbody>
 
-                                                    </table>
-                                                </div>
-                                            </div><div class="dataTables_info" id="IncompleteAttendence_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="IncompleteAttendence_paginate"><a class="paginate_button previous disabled" aria-controls="IncompleteAttendence" data-dt-idx="0" tabindex="0" id="IncompleteAttendence_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="IncompleteAttendence" data-dt-idx="1" tabindex="0" id="IncompleteAttendence_next">Next</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer text-center" style="">
-                            <span>Tells about the employees which have missing checkouts</span>
-                        </div>
-                        <!-- /.box-footer -->
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Book Name</th>
+                                <th>Borrower Name</th>
+                                <th>Date Borrow</th>
+                                <th>Contact</th>
+                                <th>Alert</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.book_title</td>
+                                    <td> @item.student_id</td>
+                                    <td>@item.Issue_Date</td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            <li class="page-item"><a class="page-link" href="#">«</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        </ul>
                     </div>
-                    <!--/.box -->
                 </div>
+
+
             </div>
-           
-        </div>
-
-        <div class="col-md-6 col-xs-12">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-warning">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Late Comers</h3>
-                            <div class="box-tools pull-right">
-                                <span id="Total Late Comers"><strong>0</strong></span>
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body no-padding">
-                            <div style="padding-right: 1%; padding-left: 1%; padding-bottom: 1%; padding-top: 1%;">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12">
-                                        <div id="LateComers_wrapper" class="dataTables_wrapper no-footer">
-                                            <div class="dataTables_length" id="LateComers_length"><label>Show <select name="LateComers_length" aria-controls="LateComers" class=""><option value="4">4</option><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="-1">All</option></select> entries</label></div><div id="LateComers_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="LateComers"></label></div><div class="dataTables_scroll">
-                                                <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;">
-                                                    <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 775px; padding-right: 0px;">
-                                                        <table class="table table-responsive table-striped employeecheck dataTable no-footer" cellspacing="0" cellpadding="0" style="width: 775px; border-collapse: separate; margin-left: 0px;" role="grid">
-                                                            <thead>
-                                                                <tr role="row">
-                                                                    <th style="color: black; border-width: 2px 0px; border-style: solid; border-color: rgb(243, 156, 18); font-weight: bold; width: 137px;" class="sorting_asc" tabindex="0" aria-controls="LateComers" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
-                                                    Name
-                                                : activate to sort column descending">
-                                                                        Name
-                                                                    </th>
-                                                                    <th style="color: black; border-width: 2px 0px; border-style: solid; border-color: rgb(243, 156, 18); font-weight: bold; width: 118px;" class="sorting" tabindex="0" aria-controls="LateComers" rowspan="1" colspan="1" aria-label="
-                                                    Reg. No.
-                                                : activate to sort column ascending">
-                                                                        Reg. No.
-                                                                    </th>
-                                                                    <th style="color: black; border-width: 2px 0px; border-style: solid; border-color: rgb(243, 156, 18); font-weight: bold; width: 232px;" class="sorting" tabindex="0" aria-controls="LateComers" rowspan="1" colspan="1" aria-label="
-                                                    Department
-                                                : activate to sort column ascending">
-                                                                        Department
-                                                                    </th>
-                                                                    <th style="color: black; border-width: 2px 0px; border-style: solid; border-color: rgb(243, 156, 18); font-weight: bold; width: 144px;" class="sorting" tabindex="0" aria-controls="LateComers" rowspan="1" colspan="1" aria-label="
-                                                    Check In Time
-                                                : activate to sort column ascending">
-                                                                        Check In Time
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                        </table>
-                                                    </div>
-                                                </div><div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%; height: 150px;">
-                                                    <table class="table table-responsive table-striped employeecheck dataTable no-footer" cellspacing="0" cellpadding="0" id="LateComers" style="width: 100%; border-collapse: separate;" role="grid" aria-describedby="LateComers_info">
-                                                        <thead>
-                                                            <tr role="row" style="height: 0px;">
-                                                                <th style="color: black; border-width: 0px; border-style: solid; border-color: rgb(243, 156, 18); font-weight: bold; width: 137px; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="sorting_asc" aria-controls="LateComers" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
-                                                    Name
-                                                : activate to sort column descending">
-                                                                    <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                                        Name
-                                                                    </div>
-                                                                </th>
-                                                                <th style="color: black; border-width: 0px; border-style: solid; border-color: rgb(243, 156, 18); font-weight: bold; width: 118px; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="sorting" aria-controls="LateComers" rowspan="1" colspan="1" aria-label="
-                                                    Reg. No.
-                                                : activate to sort column ascending">
-                                                                    <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                                        Reg. No.
-                                                                    </div>
-                                                                </th>
-                                                                <th style="color: black; border-width: 0px; border-style: solid; border-color: rgb(243, 156, 18); font-weight: bold; width: 232px; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="sorting" aria-controls="LateComers" rowspan="1" colspan="1" aria-label="
-                                                    Department
-                                                : activate to sort column ascending">
-                                                                    <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                                        Department
-                                                                    </div>
-                                                                </th>
-                                                                <th style="color: black; border-width: 0px; border-style: solid; border-color: rgb(243, 156, 18); font-weight: bold; width: 144px; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="sorting" aria-controls="LateComers" rowspan="1" colspan="1" aria-label="
-                                                    Check In Time
-                                                : activate to sort column ascending">
-                                                                    <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                                        Check In Time
-                                                                    </div>
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-
-
-                                                        <tbody>
-
-
-                                                            <tr class="odd"><td valign="top" colspan="4" class="dataTables_empty">No data available in table</td></tr>
-                                                        </tbody>
-
-                                                    </table>
-                                                </div>
-                                            </div><div class="dataTables_info" id="LateComers_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="LateComers_paginate"><a class="paginate_button previous disabled" aria-controls="LateComers" data-dt-idx="0" tabindex="0" id="LateComers_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="LateComers" data-dt-idx="1" tabindex="0" id="LateComers_next">Next</a></div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer text-center">
-                            <span>Tells about the employees who comes late today</span>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-                    <!--/.box -->
-                </div>
-            </div>
-
-       
 
 
         </div>
     </div>
+    
+    <!-- /.col -->
+
+    <br />
+
+    @* Tomorrow Dues *@
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="card-title">Tomorrow Dues</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Book Name</th>
+                                <th>Borrower Name</th>
+                                <th>Date Borrow</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.book_title</td>
+                                <td> @item.student_id</td>
+                                <td>@item.Issue_Date</td>
+                            </tr>
+                                    }
+
+
+
+                                
+
+
+
+                            </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.card -->
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+
+
+        </div>
+        <!-- /.col -->
+        <div class="card">
+
+            <div class="card-header">
+
+
+            </div>
+            <!-- /.card-header -->
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+
 
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
@@ -340,7 +257,7 @@
                         str = str.concat(str1);
                     }
                       str2 = "<span style = 'color:DodgerBlue; '><strong>" + e.entries[0].dataPoint.label +  "</strong></span><br/>";
-                   
+
                     str3 = "<span style = 'color:Tomato '>Total: </span><strong>" + total + "</strong><br/>";
 
                     return (str2.concat(str)).concat(str3);
@@ -353,10 +270,10 @@
                 showInLegend: true,
                 name: "",
                 color: "#3c8dbc",
-              
+
                 dataPoints: @Html.Raw(ViewBag.DataPoints),
             },
-           
+
 
             ]
         });

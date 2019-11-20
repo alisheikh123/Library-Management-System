@@ -67,17 +67,13 @@ namespace Library_Management_System.Controllers
 
         public ActionResult Dasboard()
          {
+            string bookTitle, borrowdate, userName;
 
             ViewBag.issueBookCount = db.LR_Issue.Where(x => x.Status == "Book Issued").Count();
             ViewBag.reserveBookCount = db.LR_Reservations.Where(x => x.status == " Reserved").Count();
             ViewBag.FineBookCount = db.LR_ReturnBook.Where(x => x.fine>0).Count();
             ViewBag.ReturnBooksCount = db.LR_Issue.Where(x => x.Status == "Available").Count();
-
-
-           
-
-            var booksIssued = db.LR_Issue.Where(x => x.Status == "Book Issued").GroupBy(x => x.title).ToList();
-            
+            var booksIssued = db.LR_Issue.Where(x => x.Status == "Book Issued").GroupBy(x => x.title).ToList();   
             List<chart> li = new List<chart>();
             foreach (var item in booksIssued)
             {
@@ -89,13 +85,23 @@ namespace Library_Management_System.Controllers
 
                 li.Add(obj);
             }
-            
-            ViewBag.DataPoints = JsonConvert.SerializeObject(li, _jsonSetting);
+            ViewBag.DataPoints= JsonConvert.SerializeObject(li, _jsonSetting);
+             var s = db.LR_Issue.ToList();
+           
+            DateTime today = new DateTime();
+            var k = from t in db.LR_Issue
+                    where t.ExpiryDate == today.Date
+                    select new {
+                       bookTitle = t.book_title,
+                        userName = t.student_id,
+                        borrowdate = t.ExpiryDate
 
+                    };
+          
+            return View(s);
 
+           
 
-
-            return View();
         }
         //Add Magazines
         public ActionResult AddMagazines(int? artId)
