@@ -67,38 +67,68 @@ namespace Library_Management_System.Controllers
 
         public ActionResult Dasboard()
          {
-            string bookTitle, borrowdate, userName;
-
+            DateTime today = DateTime.Today;
+            var yesterday = DateTime.Today.AddDays(-200);
+            DateTime tomorrow = new DateTime(today.Year, today.Month, today.Day + 2);
+           
+            //Chart
             ViewBag.issueBookCount = db.LR_Issue.Where(x => x.Status == "Book Issued").Count();
             ViewBag.reserveBookCount = db.LR_Reservations.Where(x => x.status == " Reserved").Count();
             ViewBag.FineBookCount = db.LR_ReturnBook.Where(x => x.fine>0).Count();
             ViewBag.ReturnBooksCount = db.LR_Issue.Where(x => x.Status == "Available").Count();
-            var booksIssued = db.LR_Issue.Where(x => x.Status == "Book Issued").GroupBy(x => x.title).ToList();   
+            var booksIssued = db.LR_Issue.Where(x => x.Status == "Book Issued").GroupBy(x => x.title).ToList();
+
+            //PIE
+            var totalBooksCount= db.LR_Issue.Where(x => x.artCat_id == 1).Count();
+            var BookIssueCounts = db.LR_Issue.Where(x => x.Status == "Book Issued" && x.Issue_Date<tomorrow &&x.Issue_Date==today && x.Issue_Date>yesterday).Count();
+            var BookIssueLabel = db.LR_Issue.Where(x => x.Status == "Book Issued" && x.Issue_Date < tomorrow && x.Issue_Date == today && x.Issue_Date > yesterday).Select(x=>x.title).ToList();
+            
+            List<PieChart> pieList = new List<PieChart>();
+            PieChart objs = new PieChart();
+            objs.label = objs.legendText = "BookIssued";
+            objs.y = BookIssueCounts;
+
+            pieList.Add(objs);
+
+            objs = new PieChart();
+            objs.label = objs.legendText = "Non Issued";
+            objs.y = totalBooksCount - BookIssueCounts;
+            pieList.Add(objs);
+
+
+
+            ViewBag.PiePoint = JsonConvert.SerializeObject(pieList, _jsonSetting);
+
             List<chart> li = new List<chart>();
             foreach (var item in booksIssued)
             {
                 
                 chart obj = new chart();
                 obj.label = item.Key;
-                ViewBag.label = item.Key;
+                
                 obj.y = item.Key.Count();
 
                 li.Add(obj);
             }
             ViewBag.DataPoints= JsonConvert.SerializeObject(li, _jsonSetting);
-             var s = db.LR_Issue.ToList();
-           
-            DateTime today = new DateTime();
-            var k = from t in db.LR_Issue
-                    where t.ExpiryDate == today.Date
-                    select new {
-                       bookTitle = t.book_title,
-                        userName = t.student_id,
-                        borrowdate = t.ExpiryDate
+            //End Chart
+            //Today and Tomorrow
 
-                    };
+
+           
           
-            return View(s);
+            List<PieChart> dayList = new List<PieChart>();
+            List<TomorrowExpiryDate> tomList = new List<TomorrowExpiryDate>();
+            var ExpiryDateOFBooks = db.LR_Issue.Where(x => x.ExpiryDate == today && x.Status== "Book Issued"
+            || x.ExpiryDate<tomorrow && x.ExpiryDate>today && x.Status== "Book Issued").ToList();
+           
+
+            return View(ExpiryDateOFBooks);
+            
+            //End Today and Tomorrow
+        
+           
+            
 
            
 

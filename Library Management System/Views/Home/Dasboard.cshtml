@@ -61,18 +61,28 @@
 
     </div>
     @* chart *@
-    <div id="chartContainer" style="height: 470px; width: 100%;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div id="chartContainer" style="height: 470px; width: 100%;"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="pieContainer"></div>
+            </div>
 
-
-
-
-
-
-
-
-
-
+        </div>
+    </div>
     <br />
+    @* PIE *@
+
+
+
+
+
+
+
+
+
 
     <br />
     @* Today Dues *@
@@ -80,133 +90,139 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-danger">
-               <div class="panel-heading" ><h3>Today Dues</h3></div>
+            <div class="col-md-6">
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><h3>Today Dues</h3></div>
 
 
-                <div class="panel-body">
+                    <div class="panel-body">
+                        <label>@ViewBag.TodayError</label>
 
 
+                        <table class="table table-bordered">
+                            <thead>
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-
-                                <th>Book Name</th>
-                                <th>Borrower Name</th>
-                                <th>Date Borrow</th>
-                                <th>Contact</th>
-                                <th>Alert</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
                                 <tr>
-                                    <td>@item.book_title</td>
-                                    <td> @item.student_id</td>
-                                    <td>@item.Issue_Date</td>
+
+                                    <th>Book Name</th>
+                                    <th>Borrower Name</th>
+                                    <th>Date Borrow</th>
+                                    <th>Date of Expiry</th>
+                                    <th>Contact</th>
+                                    <th>Alert</th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>
 
+                                @{
+                                    DateTime today = DateTime.Today;
+                                    DateTime tomorrow = new DateTime(today.Year, today.Month, today.Day + 2);
 
+                                }
 
-                        </tbody>
-                    </table>
-                    <div class="card-footer clearfix">
-                        <ul class="pagination pagination-sm m-0 float-right">
-                            <li class="page-item"><a class="page-link" href="#">«</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-        </div>
-    </div>
-    
-    <!-- /.col -->
-
-    <br />
-
-    @* Tomorrow Dues *@
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="card-title">Tomorrow Dues</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="panel-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-
-                                <th>Book Name</th>
-                                <th>Borrower Name</th>
-                                <th>Date Borrow</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model)
-                            {
-                            <tr>
-                                <td>@item.book_title</td>
-                                <td> @item.student_id</td>
-                                <td>@item.Issue_Date</td>
-                            </tr>
-                                    }
-
-
-
-                                
+                                @foreach (var item in Model.Where(x => x.ExpiryDate == today && x.Status == "Book Issued").ToList())
+                                {
+                                    <tr>
+                                        <td>@item.title</td>
+                                        <td> @item.student_id</td>
+                                        <td> @item.Issue_Date</td>
+                                        <td>@item.ExpiryDate</td>
+                                        <td> @item.Department</td>
+                                        <td> </td>
+                                    </tr>
+                                }
 
 
 
                             </tbody>
-                    </table>
+                        </table>
+                        <div class="card-footer clearfix">
+                            <ul class="pagination pagination-sm m-0 float-right">
+                                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
                 </div>
-                <!-- /.card-body -->
-                <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /.card -->
-            <!-- /.card -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-6">
-
-
-        </div>
-        <!-- /.col -->
-        <div class="card">
-
-            <div class="card-header">
-
 
             </div>
-            <!-- /.card-header -->
-            <!-- /.card-body -->
+
+
+
+            <!-- /.col -->
+
+
+
+
+
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="card-title">Tomorrow Dues</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="panel-body">
+                        <label>@ViewBag.TomorrowError</label>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+
+                                    <th>Book Name</th>
+                                    <th>Borrower Name</th>
+                                    <th>Date Borrow</th>
+                                    <th>Date Expiry</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.Where(x => x.ExpiryDate < tomorrow && x.ExpiryDate > today && x.Status == "Book Issued").ToList())
+                                {
+                                    <tr>
+                                        <td>@item.title</td>
+                                        <td> @item.student_id</td>
+                                        <td>@item.Issue_Date</td>
+                                        <td>@item.ExpiryDate</td>
+                                    </tr>
+                                }
+
+
+
+
+
+
+
+                            </tbody>
+                        </table>
+
+                        <!-- /.card-body -->
+                        <div class="card-footer clearfix">
+                            <ul class="pagination pagination-sm m-0 float-right">
+                                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /.card -->
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
         </div>
+        <!-- /.col -->
+
     </div>
-
-
-
+    <br />
+   
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 
@@ -216,6 +232,7 @@
 
 
 <script type="text/javascript">
+
 
     $(function () {
         var chart = new CanvasJS.Chart("chartContainer", {
@@ -277,7 +294,37 @@
 
             ]
         });
-
         chart.render();
+
+        var chart1 = new CanvasJS.Chart("pieContainer", {
+            title: {
+                text: "Total No of Books Issued According To Current-Date"
+            },
+            animationEnabled: true,
+            legend: {
+                verticalAlign: "center",
+                horizontalAlign: "left",
+                fontSize: 20,
+                fontFamily: "Helvetica"
+            },
+            theme: "light2",
+            data: [
+                {
+                    type: "pie",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    indexLabel: "{label}  {y}",
+                    startAngle: -20,
+                    showInLegend: true,
+                    toolTipContent: "{legendText} {y}%",
+                   
+                 dataPoints: @Html.Raw(ViewBag.PiePoint),
+            }
+            ]
+        });
+    chart1.render();
     });
+
+
+
 </script>
